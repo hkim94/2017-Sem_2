@@ -12,12 +12,8 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-    
-
-    </style>
-
     <script>
+	
     // side nav //
     (function($){
       $(function(){
@@ -48,29 +44,15 @@ session_start();
       $('.modal').modal();
     });
 	
-
 	//select input
 	$(document).ready(function() {
 		$('select').material_select();
 	});
-	
-	//concession hide and show
-	/*function concess(){
-		var conID = "echo $row['conID']";
-		if (conID =""){
-			document.getElementById("applybtn").style.display="block";
-			document.getElementById("viewbtn").style.display="none";
-		}else{
-			document.getElementById("applybtn").style.display="none";
-			document.getElementById("viewbtn").style.display="block";
-		}	
-	};*/
-
     </script>
 
-    </head>
+  </head>
 
-    <body>
+  <body onLoad="concess()">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
         <ul id="slide-out" class="side-nav">
@@ -158,12 +140,12 @@ session_start();
   </div>
 
 
-<div class="row" style="background-color:#E5E5E5; padding:6%; margin:0px;">
+<div class="row" style="background-color:#E5E5E5; padding:6%; margin:0px;" id="applybtn">
 	<div class="col s1"></div>
     
     <div class="col s10 center-align">
     <!-- Modal Trigger -->
-      <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal1" id="applybtn">Register Concession</a>
+      <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal1">Register Concession</a>
     
       <form action="../../Controller/pdoCon.php" method="post">
           <div id="modal1" class="modal modal-fixed-footer">
@@ -223,11 +205,11 @@ session_start();
     <div class="col s1"></div>
 	</div>
 </div>   
-<div class="row" style="background-color:#E5E5E5; padding:6%; margin:0px; display:none;">
+<div class="row" style="background-color:#E5E5E5; padding:6%; margin:0px;" id="viewbtn">
 	<div class="col s1"></div>
 	<div class="col s10 center-align">
     <!-- Modal Trigger -->
-    <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal2" id="viewbtn">View Applied Concession</a>
+    <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal2">View Applied Concession</a>
     
       <!-- Modal Structure -->
           <div id="modal2" class="modal modal-fixed-footer">
@@ -270,5 +252,21 @@ session_start();
 	</div>
     <div class="col s1"></div>
     </div>
-</body>
+    
+    <script  type="text/javascript">
+	//concession hide and show
+	
+		function concess(){
+			var conID ='<?php echo $row['conID'];?>';
+			if (conID =''){
+				document.getElementById("applybtn").style.display="block";
+				document.getElementById("viewbtn").style.display="none";
+			}else{
+				document.getElementById("applybtn").style.display="none";
+				document.getElementById("viewbtn").style.display="block";
+			}	
+		};
+	</script>
+    
+  </body>
 </html>
