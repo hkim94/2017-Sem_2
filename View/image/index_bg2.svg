@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="500px" height="900px" viewBox="0 0 500 900" enable-background="new 0 0 500 900" xml:space="preserve">
+<rect fill="#7AC143" width="502" height="902"/>
+<g>
+	<path fill="#FFFFFF" d="M242.764,292.453"/>
+	<path fill="#FFFFFF" d="M171.97,357.626c-32.889,0-59.551-29.181-59.551-65.173c0-35.994,26.662-65.173,59.551-65.173V357.626z"/>
+	<path fill="#FFFFFF" d="M387.396,297.416c-2.538,33.672-30.664,60.21-64.989,60.21c-34.307,0-62.427-26.516-64.981-60.171
+		L387.396,297.416z"/>
+	<path fill="#FFFFFF" d="M387.581,292.453c0-0.557-0.008-1.112-0.02-1.666c-0.885-35.224-29.717-63.508-65.155-63.508
+		c-34.805,0-63.239,27.286-65.076,61.637c-0.062,1.171-0.094,2.35-0.094,3.536H387.581z"/>
+	<polygon fill="#FFFFFF" points="189.825,372.721 240.266,372.375 240.266,296.825 177.8,296.825 177.8,357.265 189.668,357.265 	
+		"/>
+	<path fill="#FFFFFF" d="M177.176,292.453h63.09c0-0.557-0.008-1.112-0.021-1.666c-0.855-34.121-27.938-61.73-61.843-63.424
+		L177.176,292.453z"/>
+	<path fill="#FFFFFF" d="M190.709,366.161"/>
+</g>
+<text transform="matrix(1 0 0 1 124.9683 432.5654)" fill="#FFFFFF" font-family="'Calibri'" font-size="30">Brisbane Transit App</text>
+<polyline fill="none" stroke="#FFFFFF" stroke-miterlimit="10" points="497,759.5 326.037,759.5 267.136,834.5 141.15,834.5 
+	82.107,759.5 0,759.5 "/>
+<polyline fill="none" stroke="#FFFFFF" stroke-miterlimit="10" points="496.617,521.658 446.5,613.946 446.5,897 "/>
+<line fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="0" y1="406.354" x2="383.935" y2="901.327"/>
+<line fill="none" stroke="#FFFFFF" stroke-width="0.75" stroke-miterlimit="10" x1="270.959" y1="0" x2="498.344" y2="293.147"/>
+<polyline fill="none" stroke="#FFFFFF" stroke-miterlimit="10" points="497.003,132.282 480.146,110.149 401.416,211.454 
+	491.078,327.644 455.5,372.715 455.5,545.5 369.5,545.5 369.5,711.5 143.138,711.5 96.51,650.815 0,808.311 "/>
+<polyline fill="none" stroke="#FFFFFF" stroke-miterlimit="10" points="76.186,0.519 30.5,59.015 30.5,182.5 0,182.5 "/>
+<polyline fill="none" stroke="#FFFFFF" stroke-miterlimit="10" points="130.5,0 130.5,62.288 496.795,60.367 "/>
+<line fill="none" stroke="#FFFFFF" stroke-width="0.25" stroke-miterlimit="10" x1="497.008" y1="613.454" x2="276.636" y2="897.562"/>
+<polyline fill="none" stroke="#FFFFFF" stroke-miterlimit="10" points="33,58.5 51.5,58.5 51.5,148.654 30.228,182.71 "/>
+<polyline fill="none" stroke="#FFFFFF" stroke-miterlimit="10" points="0,335.5 38.5,335.5 38.5,897 "/>
+</svg>

@@ -57,36 +57,19 @@
       $('.modal').modal();
     });
 
-    $(document).ready(function(){
-          $('.carousel').carousel();
-    });
-
-    $('.carousel.carousel-slider').carousel({fullWidth: true});
-
     </script>
     </head>
 
-    <body>
-    <!-- Slider -->
+    <body style="background-image:url(View/image/index_bg2.svg); background-size:cover; background-repeat:no-repeat;">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <div class="row">
-    	<div class="col s12">
-        	<div class="carousel">
-            	<a class="carousel-item" href="#one!"><img src=""></a>
-                <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/250/250/nature/2"></a>
-                <a class="carousel-item" href="#three!"><img src="https://lorempixel.com/250/250/nature/3"></a>
-                <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/250/250/nature/4"></a>
-                <a class="carousel-item" href="#five!"><img src="https://lorempixel.com/250/250/nature/5"></a>
-            </div>
-        </div>
-    </div>
     
     <!-- Modal Trigger -->
+    <div class="row" style="margin-top:100%;"></div>
     <div class="row" style="margin-top:5%;">
     	<div class="col s12">
         	<div class="col s1"></div>
             <div class="col s10 center-align">
-                <a class="waves-effect waves-light btn-large modal-trigger" style="background-color:rgb(122, 193, 67);" href="#modal1"><i class="material-icons right">edit</i>Sign up</a>
+                <a class="waves-effect waves-light btn-large modal-trigger" style="background-color:white; color:rgb(122, 193, 67);" href="#modal1"><i class="material-icons right">edit</i>Sign up</a>
             </div>
     		<div class="col s1"></div>
         </div>
@@ -95,7 +78,7 @@
     	<div class="col s12">
     		<div class="col s1"></div>
     			<div class="col s10 center-align">
-	                <a class="waves-effect waves-light btn-large modal-trigger" style="background-color:rgb(122, 193, 67);" href="#modal2"><i class="material-icons right">lock</i>Login</a>
+	                <a class="waves-effect waves-light btn-large modal-trigger" style="background-color:white; color:rgb(122, 193, 67);" href="#modal2"><i class="material-icons right">lock</i>Login</a>
             	</div>
     		<div class="col s1"></div>
   		</div>

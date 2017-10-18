@@ -13,41 +13,6 @@ session_start();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
-   nav{
-      background-color:rgba(177, 218, 143, 0.8);
-    }
-
-    .breadcrumb{
-      font-size: 13pt;
-    }
-
-    .mainpage{
-      margin-top:10%;
-    }
-
-    .myprofile{
-      margin-top:10%;
-    }
-
-    .profile_edit{
-      float: right;
-      margin-right:10%;
-	}
-	
-	.tabs{
-		color:#3F8755;
-	}
-	
-	.tabs .tab a{
-		color:rgba(123, 193, 68, 0.8);
-	}
-	
-	.tabs .tab a:hover, .tabs .tab a.active {
-		color:rgb(123, 193, 68);
-	}
-	.tabs .indicator{
-		background-color:rgb(123, 193, 68);
-	}s
 
     </style>
 
@@ -66,13 +31,17 @@ session_start();
     $('.button-collapse').sideNav('hide');
     // Destroy sideNav
     $('.button-collapse').sideNav('destroy');
+	
+	$(document).ready(function(){
+		$('.modal').modal();
+	});
 
     </script>
   </head>
 
   <body>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-      <div style="background-color:rgb(123, 193, 68);">
+      <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
         <ul id="slide-out" class="side-nav">
          <?php
                 require('../../Model/db.php');
@@ -105,54 +74,62 @@ session_start();
           <li><a href="mygocard.php"><i class="material-icons">credit_card</i>Go Card</a></li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="small material-icons" style="color:white; margin:10px;">menu</i></a>
+        <a class="modal-trigger" href="#modal5"><i class="small material-icons" style="color:white; margin:10px; float:right;">add</i></a>
       </div>
-
-
-      <!-- breadcrumb -->
-      <nav>
-        <div class="nav-wrapper">
-            <div class="col s12" style="margin-left:10%;">
-              <a href="#!" class="breadcrumb" style="color:#3F8755;">My Page</a>
-              <a href="#!" class="breadcrumb" style="color:#3F8755;">My Stop List</a>
-            </div>
-        </div>
-      </nav>
       <?php
       	}
 	  ?>
-
-     <!-- icon & Bg -->
-     <div class="row">
-     <div class="col s9">
-     </div>
-     <div class="col s3">
-     </div>
-     </div>
-
-     <!-- btns ADD & EDIT -->
-     <div class="row">
-        <div class="col 12">
-        </div>
+      
+      <div class="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
+      	<div class="row">
+        	<div class="col s2"></div>
+            <div class="col s8">
+            	<img src="../image/fav_stop.svg" alt="" style="width:100%;">
+      		</div>
+      		<div class="col s2"></div>
+  		</div> 
      </div>
      
-     <!-- Favourite Bus / Stop register -->
-     <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
-            <li class="tab col s3"><a href="#buslist">My Bus</a></li>
-            <li class="tab col s3"><a class="active" href="#stoplist">My Bus Stop</a></li>
-            <li class="tab col s3"><a href="#alert">Alert</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s1"></div>
-        <div id="buslist" class="col s10">Test 1</div>
-        <div id="stoplist" class="col s10">Test 2</div>
-        <div id="alert" class="col s10">Test 3</div>
-        <div class="col s1"></div>
-      </div>
- 	</div>
+     <div id="modal5" class="modal modal-fixed-footer">
+            <div class="modal-content">
+           		<div style="width:100%; border-bottom:thin solid #CCC">
+                	<h6 style="text-align:right; color:#999">ADD TO FAVOURITE</h6>
+                </div>
+                <div style="margin:5%;">
+                	<a class="waves-effect waves-light btn" style="background-color:rgb(123, 193, 68); width:100%;"><i class="material-icons right">location_searching</i>SEARCH STOP</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+            </div>
+       </div>
+      
+      <?php
+	  require_once("../../Model/db.php");
+	  $result = $conn ->query('SELECT * FROM `favourite_stop`', PDO::FETCH_ASSOC);
+	  $count = 0;
+	  foreach ($result as $user){
+		  $count++;
+	  ?>
+      <div class="card horizontal" style="margin:5%; width:auto; height:80px;">
+      	<div class="card-image" style="background-color:rgb(248, 151, 40); width:20%;">
+      		<div class="center-align">
+        		<i class="small material-icons" style="color:white; transform: translateY(100%);">nature</i>
+        	</div>
+      	</div>
+        <div class="card-stacked">
+        	<div class="card-content" style="padding:15px;">
+            	<a href="../../Controller/pdoDelete.php?f_BusID=<?php echo $user['f_StopID'];?>" onClick="Materialize.toast('I am a toast', 4000)"><i class="small material-icons" style="color:rgb(123, 193, 68); float:right;">clear</i></a>
+            	<p style="font-size:11pt; font-weight:bold;">Favourite Stop #<?php echo $user['f_StopID'];?></p>
+          		<p><?php echo $user['stopNo'];?></p>
+                <p style="text-align:right; font-size:7pt;">created: <?php echo $user['add_date'];?></p>
+        	</div>
+      	</div>
+	  </div>
+	  <?php
+      }
+	  ?>
+      
 
 </body>
 </html>

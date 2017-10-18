@@ -73,7 +73,10 @@ session_start();
               <div class="background">
                 <img src="../image/bg3.jpg">
               </div>
-              <img class="circle" src="../image/user_icon.svg"></a>
+              <div>
+              	<img class="circle" src="../image/user_icon.svg" style="display:inline-block";>
+                <a href="../../Controller/pdoLogout.php" style="display:inline-block; float:right; text-decoration:none; color:black;"><i class="material-icons">exit_to_app</i></a>
+              </div>
               <span class="white-text name"><?php echo $row['fname']; echo "\n\n"; echo $row['lname'];?></span>
               <span class="white-text email"><?php echo $row['email'];?></span>
             </div>
@@ -126,50 +129,50 @@ session_start();
            <input type="hidden" name="userID" value="<?php echo $row['userID'];?>">
            <!-- Gocard -->
                <div class="row" style="margin-bottom:0px;">
-                   <div class="col s2"></div>
-                   <div class="input-field col s8">
+                   <div class="col s1"></div>
+                   <div class="input-field col s10">
                        <i class="material-icons prefix">credit_card</i>
                        <input id="gocardno" name="gocardno" value="<?php echo $row['gocardno'];?>" disabled>
                    </div>
-                   <div class="col s2"></div>
+                   <div class="col s1"></div>
                </div>
            		
                <!-- User's Name -->
                <div class="row" style="margin-bottom:0px;">
-                  <div class="col s2"></div>
-                  <div class="input-field col s8">
+                  <div class="col s1"></div>
+                  <div class="input-field col s10">
                      <i class="material-icons prefix">account_circle</i>
                      <input type="text" id="fname" name="fname" value="<?php echo $row['fname'];?>">
                   </div>
-                  <div class="col s2"></div>
+                  <div class="col s1"></div>
                 </div>
                 
                <div class="row" style="margin-bottom:0px;">
-                  <div class="col s2"></div>
-                  <div class="input-field col s8">
+                  <div class="col s1"></div>
+                  <div class="input-field col s10">
                      <i class="material-icons prefix">account_circle</i>
                      <input type="text" id="lname" name="lname" value="<?php echo $row['lname'];?>">
                   </div>
-                  <div class="col s2"></div>
+                  <div class="col s1"></div>
                 </div>
                 
                 <!-- Email and Phone -->
                 <div class="row" style="margin-bottom:0px;">
-                    <div class="col s2"></div>
-                    <div class="input-field col s8">
+                    <div class="col s1"></div>
+                    <div class="input-field col s10">
                         <i class="material-icons prefix">email</i>
                         <input type="text" id="email" name="email" value="<?php echo $row['email'];?>">
                     </div>
-                    <div class="col s2"></div>
+                    <div class="col s1"></div>
                  </div>
                  
                  <div class="row" style="margin-bottom:0px;">
-                    <div class="col s2"></div>
-                    <div class="input-field col s8">
+                    <div class="col s1"></div>
+                    <div class="input-field col s10">
                         <i class="material-icons prefix">phone</i>
                         <input type="text" id="mobile" name="mobile" value="<?php echo $row['mobile'];?>">
                     </div>
-                    <div class="col s2"></div>
+                    <div class="col s1"></div>
                  </div>
                  
                  <!-- button -->
