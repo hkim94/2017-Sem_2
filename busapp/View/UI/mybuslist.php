@@ -42,6 +42,23 @@ session_start();
 		y.style.display = "block";
     	}
 	}
+	
+	function delete_row(f_BusID){
+		$.ajax({
+			type:'post',
+  			url:'../../Controller/pdoDelete.php',
+			data:{
+				delete_row:'delete_row',
+   				row_id:f_BusID,
+				},
+				success:function(response) {
+					if(response=="success"){
+						var row=document.getElementById("row"+id);
+						row.parentNode.removeChild(row);
+						}
+						}
+						});
+						}
   	</script>
   </head>
 
@@ -77,7 +94,7 @@ session_start();
 
           <li><div class="divider"></div></li>
           <li><a class="subheader">My Page</a></li>
-          <li><a href="my profile.php"><i class="material-icons">account_box</i>Profile</a></li>
+          <li><a href="myprofile.php"><i class="material-icons">account_box</i>Profile</a></li>
           <li><a href="mybuslist.php"><i class="material-icons">directions_bus</i>My Favourite Bus</a></li>
           <li><a href="mystop.php"><i class="material-icons">nature_people</i>My Bus Stop</a></li>
           <li><a href="mygocard.php"><i class="material-icons">credit_card</i>Go Card</a></li>
@@ -141,7 +158,7 @@ session_start();
 	  foreach ($result as $user){
 		  $count++;
 	  ?>
-      <div class="card horizontal" style="margin:5%; width:auto; height:80px;">
+      <section class="card horizontal" style="margin:5%; width:auto; height:80px;">
       	<div class="card-image" style="background-color:rgb(248, 151, 40); width:20%;">
       		<div class="center-align">
         		<i class="small material-icons" style="color:white; transform: translateY(100%);">directions_bus</i>
@@ -149,16 +166,42 @@ session_start();
       	</div>
         <div class="card-stacked">
         	<div class="card-content" style="padding:15px;">
-            	<a href="../../Controller/pdoDelete.php?f_BusID=<?php echo $user['f_BusID'];?>" onClick="Materialize.toast('I am a toast', 4000)"><i class="small material-icons" style="color:rgb(123, 193, 68); float:right;">clear</i></a>
+                <span class="delete" style="cursor:pointer;" id='del_<?php echo $user['f_BusID'];?>'><i class="small material-icons" style="color:rgb(123, 193, 68); float:right;">clear</i></span>
             	<p style="font-size:11pt; font-weight:bold;">Favourite Bus #<?php echo $user['f_BusID'];?></p>
           		<p><?php echo $user['busno'];?></p>
-                <p style="text-align:right; font-size:7pt;">created: <?php echo $user['add_date'];?></p>
         	</div>
       	</div>
-	  </div>
+	  </section>
 	  <?php
       }
 	  ?>
-
 </body>
 </html>
+<script>
+$(document).ready(function(){
+ // Delete 
+ $('.delete').click(function(){
+  var el = this;
+  var id = this.id;
+  var splitid = id.split("_");
+
+  // Delete id
+  var deleteid = splitid[1];
+ 
+  // AJAX Request
+  $.ajax({
+   url: '../../Controller/F_bus_Delete.php',
+   type: 'POST',
+   data: { f_BusID:deleteid },
+   success: function(response){
+
+    // Removing row from HTML Table
+    $(el).closest('section').css('background','rgb(248, 151, 40)');
+    $(el).closest('section').fadeOut(800, function(){ 
+     $(this).remove();
+    });
+   }
+  });
+ });
+});
+</script>

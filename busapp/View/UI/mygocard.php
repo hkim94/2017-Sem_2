@@ -84,7 +84,7 @@ session_start();
 
           <li><div class="divider"></div></li>
           <li><a class="subheader">My Page</a></li>
-          <li><a href="my profile.php"><i class="material-icons">account_box</i>Profile</a></li>
+          <li><a href="myprofile.php"><i class="material-icons">account_box</i>Profile</a></li>
           <li><a href="mybuslist.php"><i class="material-icons">directions_bus</i>My Favourite Bus</a></li>
           <li><a href="mystop.php"><i class="material-icons">nature_people</i>My Bus Stop</a></li>
           <li><a href="mygocard.php"><i class="material-icons">credit_card</i>Go Card</a></li>

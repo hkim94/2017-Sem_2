@@ -9,13 +9,6 @@ if(isset($_REQUEST['f_BusID'])){
     $query = $conn->prepare($sql);
     $query->execute(array(":f_BusID" => $f_BusID));
 }
-if(isset($_REQUEST['delete_busid'])){
-    $BookID = $_REQUEST['delete_busid'];
-    $sql = "DELETE FROM `favourite_bus` WHERE `f_BusID` = :f_BusID";
-    $query = $conn->prepare($sql);
-    $query->execute(array(":f_BusID" => $f_BusID));
-	header("location:http://localhost/busapp/View/UI/mybuslist.php");
-}
 
 if(isset($_REQUEST['delete_stopid'])){
     $BookID = $_REQUEST['delete_stopid'];
