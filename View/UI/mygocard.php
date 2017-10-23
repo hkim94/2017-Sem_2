@@ -12,31 +12,8 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-    nav{
-      background-color: rgba(177, 218, 143, 0.8);
-    }
-
-    .breadcrumb{
-      font-size: 13pt;
-    }
-
-    .mainpage{
-      margin-top:10%;
-    }
-
-    .myprofile{
-      margin-top:10%;
-    }
-
-    .profile_edit{
-      float: right;
-      margin-right:10%;
-    }
-
-    </style>
-
     <script>
+	
     // side nav //
     (function($){
       $(function(){
@@ -45,13 +22,13 @@ session_start();
     })(jQuery);
 
     $(".button-collapse").sideNav();
-
     $('.button-collapse').sideNav('show');
     // Hide sideNav
     $('.button-collapse').sideNav('hide');
     // Destroy sideNav
     $('.button-collapse').sideNav('destroy');
 	
+	//Modal trigger and content//
     function activateModal() {
     // initialise modal element
     var modalEl = document.createElement('div');
@@ -59,32 +36,25 @@ session_start();
     modalEl.style.height = 'auto';
     modalEl.style.margin = '5%; auto';
     modalEl.style.backgroundColor = '#fff';
-
-    // show modal
+	// show modal
     mui.overlay('on', modalEl);
     }
-
-    $(document).ready(function() {
+    
+	$(document).ready(function() {
       $('.modal').modal();
     });
-
-    $(document).ready(function(){
-          $('.carousel').carousel();
-    });
-
-    $('.carousel.carousel-slider').carousel({fullWidth: true});
 	
+	//select input
 	$(document).ready(function() {
-    $('select').material_select();
-  	});
-
+		$('select').material_select();
+	});
     </script>
 
-    </head>
+  </head>
 
-    <body>
+  <body onLoad="concess()">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <div style="background-color:rgb(123, 193, 68);">
+      <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
         <ul id="slide-out" class="side-nav">
          <?php
                 require('../../Model/db.php');
@@ -100,7 +70,10 @@ session_start();
               <div class="background">
                 <img src="../image/bg3.jpg">
               </div>
-              <img class="circle" src="../image/user_icon.svg"></a>
+              <div>
+              	<img class="circle" src="../image/user_icon.svg" style="display:inline-block";>
+                <a href="../../Controller/pdoLogout.php" style="display:inline-block; float:right; text-decoration:none; color:black;"><i class="material-icons">exit_to_app</i></a>
+              </div>
               <span class="white-text name"><?php echo $row['fname']; echo "\n\n"; echo $row['lname'];?></span>
               <span class="white-text email"><?php echo $row['email'];?></span>
             </div>
@@ -119,33 +92,25 @@ session_start();
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="small material-icons" style="color:white; margin:10px;">menu</i></a>
       </div>
 
-  <!-- breadcrumb -->
-  <nav>
-    <div class="nav-wrapper">
-        <div class="col s12" style="margin-left:10%;">
-          <a href="#!" class="breadcrumb"  style="color:#3F8755;">My Page</a>
-          <a href="#!" class="breadcrumb" style="color:#3F8755;">My Go Card</a>
-        </div>
-    </div>
-  </nav>
   <?php
   	}
   ?>
 
-<div class="mainpage">
+<div class="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
   <div class="row">
    	<div class="col s2"></div>
       <div class="col s8">
-  	    <img src="../image/mycard.svg" alt="" class="z-depth-5" style="border-radius:30px;">
+  	    <img src="../image/card_green.svg" alt="" style="width:100%;">
       </div>
       <div class="col s2"></div>
-  </div>
+  </div> 
+</div>
 
-  <div class="row">
-    <div class="col s2"></div>
-    <div class="col s8">
+<div class="row">
+    <div class="col s1"></div>
+    <div class="col s10">
 
-      <div class="my_card_font">
+      <div class="my_card_font" style="margin-top:5%;">
       	<?php
         	require('../../Model/db.php');
             	if(isset($_SESSION['userID'])){
@@ -154,36 +119,43 @@ session_start();
                     $result ->execute(array(':userID' => $userID));
                     $row = $result->fetch();
            ?>
-        <div>
-          Card Number: <?php echo $row['gocardno']; ?>
+        <div style="border:1px solid #CCC; padding:5px; margin-bottom:10%;">
+          <h6 style="font-weight:bold;">Card Number</h6>
+          <p style="text-align:right; margin:0px;"><?php echo $row['gocardno']; ?></p>
         </div>
-        <div>
-          Balance: <?php echo $row['balance']; ?>
+        <div style="border:1px solid #CCC; padding:5px; margin-bottom:10%;">
+          <h6 style="font-weight:bold;">Balance</h6>
+		  <p style="text-align:right; margin:0px;">$ <?php echo $row['balance']; ?></p>
+        </div>
+        <div style="border:1px solid #CCC; padding:5px; margin-bottom:10%;">
+          <h6 style="font-weight:bold;">Concession</h6>
+		  <p style="text-align:right; margin:0px;"><?php echo $row['conID'];?></p>
         </div>
         <?php
 			}
 		?>
       </div>
     </div>
-    <div class="col s2"></div>
+    <div class="col s1"></div>
   </div>
-</div>
 
-<div class="row">
-	<div class="col s2"></div>
+
+<div class="row" style="background-color:#E5E5E5; padding:6%; margin:0px;" id="applybtn">
+	<div class="col s1"></div>
     
-    <div class="col s4">
+    <div class="col s10 center-align">
     <!-- Modal Trigger -->
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Register Concession</a>
+      <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal1">Register Concession</a>
     
       <form action="../../Controller/pdoCon.php" method="post">
           <div id="modal1" class="modal modal-fixed-footer">
             <div class="modal-content">
-              <h5>Register Concession</h5> 
+            	<div style="width:100%; border-bottom:thin solid #CCC; margin-bottom:5%;">
+                	<h6 style="text-align:right; color:#999">REGISTER CONCESSION</h6>
+                </div>
                 <!-- inputs -->
                 <div class="row">
                     <!-- Go Card number -->
-                    <div class="row">
                     <?php
         				require('../../Model/db.php');
 						if(isset($_SESSION['userID'])){
@@ -192,22 +164,20 @@ session_start();
 							$result ->execute(array(':userID' => $userID));
 							$row = $result->fetch();
          			 ?>
-	                    <div class="input-field col s12"> <i class="material-icons prefix">credit_card</i>
+	                    <div class="input-field col s12">
                             <input name="gocardno" type="text" value="<?php echo $row['gocardno']?>" disabled>
-                             <input type="hidden"name="gocardno1" value="<?php echo $row['gocardno']?>">
+                            <input type="hidden"name="gocardno1" value="<?php echo $row['gocardno']?>">
                             <input type="hidden" name="userID" value="<?php echo $row['userID']?>">
                             <label for="gocardno" data-error="wrong" data-success="right">Gocard Number</label>
                         </div>
                      <?php
 						}
 					 ?>
-                        <div class="input-field col s12"> <i class="material-icons prefix">credit_card</i>
+                        <div class="input-field col s12">
                             <input name="conID" type="text" class="validate" required>
                             <label for="conID" data-error="wrong" data-success="right">Concession ID</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12"> <i class="material-icons prefix">view_list</i>
+                        <div class="input-field col s12">
                         	<select name="conType">
                                 <option value="" disabled selected>Choose your option</option>
                             	<option value="student">Student</option>
@@ -217,17 +187,14 @@ session_start();
                             </select> 
                             <label>Concession Type</label>
                         </div>
-                        <div class="input-field col s12"> <i class="material-icons prefix">work</i>
+                        <div class="input-field col s12">
                             <input name="organisation" type="text" class="validate" required>
                             <label for="organisation" data-error="wrong" data-success="right">Organisation</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12"> <i class="material-icons prefix">date_range</i>
+                        <div class="input-field col s12">
                             <input name="DOB" type="date" class="validate" title="Date of Birth" required>
                             <label for="DOB" data-error="wrong" data-success="right"></label>
-                        </div>
-                    </div>            
+                        </div>         
             </div>
           </div>
           <div class="modal-footer">
@@ -235,25 +202,71 @@ session_start();
           </div>
        </form>
 	</div>
-    
-    <div class="col s4">
+    <div class="col s1"></div>
+	</div>
+</div>   
+<div class="row" style="background-color:#E5E5E5; padding:6%; margin:0px;" id="viewbtn">
+	<div class="col s1"></div>
+	<div class="col s10 center-align">
     <!-- Modal Trigger -->
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal2">View Applied Concession</a>
+    <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal2">View Applied Concession</a>
     
       <!-- Modal Structure -->
           <div id="modal2" class="modal modal-fixed-footer">
             <div class="modal-content">
-              <h4>Applied Concession</h4>
-              <p>
-              </p>
+            <?php
+            	require('../../Model/db.php');
+					if(isset($_SESSION['userID'])){
+						$userID = $_SESSION['userID'];
+							$result = $conn->prepare("SELECT * FROM `gocard` LEFT JOIN `users` ON `users`.`userID` = `gocard`.`userID` WHERE `users`.userID = :userID");
+							$result ->execute(array(':userID' => $userID));
+							$row = $result->fetch();
+             ?>
+             	<div style="width:100%; border-bottom:thin solid #CCC">
+                	<h6 style="text-align:right;">Applied Concession</h6>
+                </div>
+                <div style="margin-top:5%; border:1px solid #CCC; padding:5px;">
+                	<p style="font-weight:100; margin:0px;">CONCESSION ID</p>
+                    <p style="margin:0px; color:rgb(123, 193, 68);"><?php echo $row['conID'];?></p>
+                </div>
+                <div style="margin-top:5%; border:1px solid #CCC; padding:5px;">
+                	<p style="font-weight:100; margin:0px;">CONCESSION TYPE</p>
+                	<p style="margin:0px; color:rgb(123, 193, 68);"><?php echo $row['conType'];?></p>
+                </div>    
+                <div style="margin-top:5%; border:1px solid #CCC; padding:5px;">
+                	<p style="font-weight:100; margin:0px;">ORGANISATION</p>
+                	<p style="margin:0px; color:rgb(123, 193, 68);"><?php echo $row['organisation'];?></p>
+                </div>
+                <div style="margin-top:5%; border:1px solid #CCC; padding:5px;">
+	                <p style="font-weight:100; margin:0px;">DATE OF BIRTH</p>
+                	<p style="margin:0px; color:rgb(123, 193, 68);"><?php echo $row['DOB'];?></p>
+                </div>
             </div>
             <div class="modal-footer">
               <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
             </div>
           </div>
+          <?php
+		   }
+		   ?>
 	</div>
+    <div class="col s1"></div>
+    </div>
     
-    <div class="col s2"></div>
-</div>
-</body>
+    <script  type="text/javascript">
+	//concession hide and show
+	
+		function concess(){
+			var conID ='<?php echo $row['conID'];?>';
+			if (conID =''){
+				document.getElementById("applybtn").style.display="block";
+				document.getElementById("viewbtn").style.display="none";
+			}else{
+				document.getElementById("applybtn").style.display="none";
+				document.getElementById("viewbtn").style.display="block";
+			}	
+		};
+	</script>
+    
+  </body>
 </html>

@@ -12,46 +12,6 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-     <style>
-    nav{
-      background-color:rgba(177, 218, 143, 0.8);
-    }
-
-    .breadcrumb{
-      font-size: 13pt;
-    }
-
-    .mainpage{
-      margin-top:10%;
-    }
-
-    .myprofile{
-      margin-top:10%;
-    }
-
-    .profile_edit{
-      float: right;
-      margin-right:10%;
-	}
-	
-	.tabs{
-		color:#3F8755;
-	}
-	
-	.tabs .tab a{
-		color:rgba(123, 193, 68, 0.8);
-	}
-	
-	.tabs .tab a:hover, .tabs .tab a.active {
-		color:rgb(123, 193, 68);
-	}
-	.tabs .indicator{
-		background-color:rgb(123, 193, 68);
-	}
-
-    </style>
-
     <script>
     // side nav //
     (function($){
@@ -61,19 +21,33 @@ session_start();
     })(jQuery);
 
     $(".button-collapse").sideNav();
-
     $('.button-collapse').sideNav('show');
     // Hide sideNav
     $('.button-collapse').sideNav('hide');
     // Destroy sideNav
     $('.button-collapse').sideNav('destroy');
-
-    </script>
+	
+	$(document).ready(function(){
+		$('.modal').modal();
+	});
+	
+	function fav_toggle() {
+    	var x = document.getElementById("fav1");
+		var y = document.getElementById("fav2");
+    	if (x.style.display === "none") {
+        x.style.display = "block";
+		y.style.display = "none";
+    	} else {
+        x.style.display = "none";
+		y.style.display = "block";
+    	}
+	}
+  	</script>
   </head>
 
   <body>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-      <div style="background-color:rgb(123, 193, 68);">
+      <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
         <ul id="slide-out" class="side-nav">
          <?php
                 require('../../Model/db.php');
@@ -89,7 +63,10 @@ session_start();
               <div class="background">
                 <img src="../image/bg3.jpg">
               </div>
-              <img class="circle" src="../image/user_icon.svg"></a>
+              <div>
+              	<img class="circle" src="../image/user_icon.svg" style="display:inline-block";>
+                <a href="../../Controller/pdoLogout.php" style="display:inline-block; float:right; text-decoration:none; color:black;"><i class="material-icons">exit_to_app</i></a>
+              </div>
               <span class="white-text name"><?php echo $row['fname']; echo "\n\n"; echo $row['lname'];?></span>
               <span class="white-text email"><?php echo $row['email'];?></span>
             </div>
@@ -106,54 +83,82 @@ session_start();
           <li><a href="mygocard.php"><i class="material-icons">credit_card</i>Go Card</a></li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="small material-icons" style="color:white; margin:10px;">menu</i></a>
+        <a class="modal-trigger" href="#modal5"><i class="small material-icons" style="color:white; margin:10px; float:right;">add</i></a>
       </div>
-
-
-      <!-- breadcrumb -->
-      <nav style="background-color:rgba(177, 218, 143, 0.8);">
-        <div class="nav-wrapper">
-            <div class="col s12" style="margin-left:10%;">
-              <a href="#!" class="breadcrumb" style="color:#3F8755;">My Page</a>
-              <a href="#!" class="breadcrumb" style="color:#3F8755;">My Bus List</a>
-            </div>
-        </div>
-      </nav>
-      <?php
+	  <?php
       	}
 	  ?>
-
-     <!-- icon & Bg -->
-     <div class="row">
-     <div class="col s9">
+      
+      <div id="modal5" class="modal modal-fixed-footer">
+            <div class="modal-content">
+           		<div style="width:100%; border-bottom:thin solid #CCC">
+                	<h6 style="text-align:right; color:#999">ADD TO FAVOURITE</h6>
+                </div>
+            <?php
+	  			require_once("../../Model/db.php");
+	  			$result = $conn ->query('SELECT * FROM `bus`', PDO::FETCH_ASSOC);
+	  			$count = 0;
+	  			foreach ($result as $user){
+		  		$count++;
+	  		?>
+            <div style="border-bottom:thin solid #CCC; ">
+            	<div style="margin:5%; display:inline-block; width:30%;">
+                	<img src="../image/bus_img.jpg" alt="" style="width:100%; border-radius:5px;">
+                </div>
+                <div style="display:inline-block; float:left; margin-top:8%; width:20%;">
+                	<div onClick="fav_toggle()" id="fav1"><i class="material-icons">favorite_border</i></div>
+                    <div onClick="fav_toggle()" id="fav2" style="display:none;"><i class="material-icons">favorite</i></div>
+                </div>
+                <div style="display:inline-block; float:left; margin-top:3%; width:40%;">
+                	<h6 style="display:inline-block; font-weight:bold;">ROUTE CODE</h6><br>
+					No. <?php echo $user['busno'];?>
+                </div>
+            </div>    
+            <?php
+				}
+			?>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+            </div>
+       </div>
+      
+      
+      <div class="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
+      	<div class="row">
+        	<div class="col s2"></div>
+            <div class="col s8">
+            	<img src="../image/fav_bus.svg" alt="" style="width:100%;">
+      		</div>
+      		<div class="col s2"></div>
+  		</div> 
      </div>
-     <div class="col s3">
-     </div>
-     </div>
-
-     <!-- btns ADD & EDIT -->
-     <div class="row">
-        <div class="col 12">
-        </div>
-     </div>
-     
-     <!-- Favourite Bus / Stop register -->
-     <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
-            <li class="tab col s3"><a class="active" href="#buslist">My Bus</a></li>
-            <li class="tab col s3"><a href="#stoplist">My Bus Stop</a></li>
-            <li class="tab col s3"><a href="#alert">Alert</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s1"></div>
-        <div id="buslist" class="col s10">Test 1</div>
-        <div id="stoplist" class="col s10">Test 2</div>
-        <div id="alert" class="col s10">Test 3</div>
-        <div class="col s1"></div>
-      </div>
- 	</div>
+          
+      <?php
+	  require_once("../../Model/db.php");
+	  $result = $conn ->query('SELECT * FROM `favourite_bus`', PDO::FETCH_ASSOC);
+	  $count = 0;
+	  foreach ($result as $user){
+		  $count++;
+	  ?>
+      <div class="card horizontal" style="margin:5%; width:auto; height:80px;">
+      	<div class="card-image" style="background-color:rgb(248, 151, 40); width:20%;">
+      		<div class="center-align">
+        		<i class="small material-icons" style="color:white; transform: translateY(100%);">directions_bus</i>
+        	</div>
+      	</div>
+        <div class="card-stacked">
+        	<div class="card-content" style="padding:15px;">
+            	<a href="../../Controller/pdoDelete.php?f_BusID=<?php echo $user['f_BusID'];?>" onClick="Materialize.toast('I am a toast', 4000)"><i class="small material-icons" style="color:rgb(123, 193, 68); float:right;">clear</i></a>
+            	<p style="font-size:11pt; font-weight:bold;">Favourite Bus #<?php echo $user['f_BusID'];?></p>
+          		<p><?php echo $user['busno'];?></p>
+                <p style="text-align:right; font-size:7pt;">created: <?php echo $user['add_date'];?></p>
+        	</div>
+      	</div>
+	  </div>
+	  <?php
+      }
+	  ?>
 
 </body>
 </html>
