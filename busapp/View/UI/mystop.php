@@ -92,10 +92,18 @@ session_start();
                 	<h6 style="text-align:right; color:#999">ADD TO FAVOURITE</h6>
                 </div>
                 <div style="margin:5%;">
-                	<span class="search" style="cursor:pointer;"><a class="waves-effect waves-light btn" style="background-color:rgb(123, 193, 68); width:100%;"><i class="material-icons right">location_searching</i>SEARCH STOPS</a></span>
+                    <form id="gpsform">
+                        <input type="text" id="lat" name="LATITUDE" >
+                        <input type="text" id="log" name="LONGITUDE">            	
+                        <button type="submit" style="border:none;">
+                            <span class="search" onClick="getLocation()" style="cursor:pointer;">
+                                <a class="waves-effect waves-light btn" style="background-color:rgb(123, 193, 68); width:100%;">
+                                <i class="material-icons right">location_searching</i>SEARCH STOPS</a>
+                            </span>
+                        </button>
+                    </form>
                 </div>
-                <p id="mylocation">
-                </p>
+
             </div>
             <div class="modal-footer">
               <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
@@ -145,9 +153,7 @@ $(document).ready(function(){
 	   url: '../../Controller/F_stop_Delete.php',
 	   type: 'POST',
 	   data: { f_StopID:deleteid },
-	   success: function(response){
-	
-		// Removing row from HTML Table
+	   success: function(response){	
 		$(el).closest('section').css('background','rgb(248, 151, 40)');
 		$(el).closest('section').fadeOut(800, function(){ 
 		 $(this).remove();
@@ -156,21 +162,35 @@ $(document).ready(function(){
 	  });
 	 });
 
-	$('.search').click(function(){
-	  $.ajax({
-	   url:'../../Controller/F_stop_Select.php',
-	   type: 'GET',
-	   success: function (data) {
-		   alert(data);
-	   } 
-	  });
-	});
+//	$('.search').click(function(){
+//	  $.ajax({
+//	   url:'../../Controller/F_stop_Select.php',
+//	   type: 'GET',
+//	   success: function (data) {
+//		   alert(data);
+//	   } 
+//	  });
+//	});
+	
+//	$('.search').click(function(){
+//	  $.ajax({
+//	   url:'../../Controller/F_stop_Select.php',
+//	   type: 'POST',
+//	   success: function (data) {
+//		   alert(data);
+//	   } 
+//	  });
+//	});
+	
+	// POST to Database to select bus stop
+	//$("#gpsform").ajaxSubmit({url: '../../Controller/F_stop_Select.php', type: 'post'})
 	
  });
 
-
+// GET Lat & Log value of current position
 var x = document.getElementById("mylocation");
-
+var y = document.getElementById("lat");
+var z = document.getElementById("log");
 function getLocation(){
 	if (navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -178,22 +198,20 @@ function getLocation(){
 		x.innerHTML = "Geolocation is not supported by this browser.";
 	}
 }
-
 function showPosition(position){
-	x.innerHTML = "Latitude: " + position.coords.latitude +
-	"<br>Longitude: " + position.coords.longitude;
-	var pos = {lat: position.coords.latitude, lng:position.coords.longitude};
+	y.value = "Latitude: " + position.coords.latitude;
+	z.value = "Longitude: " + position.coords.longitude;
 }
 
-function getArea(pos){
-	showPosition(position);
-	var pos = {lat: position.coords.latitude, lng:position.coords.longitude};
-	pos[0] = [lat - 0.005, lng - 0.005];
-	pos[1] = [lat - 0.005, lng + 0.005];
-	pos[2] = [lat + 0.005, lng + 0.005];
-	pos[3] = [lat + 0.005, lng - 0.005];
-	return pos;
-}
+//function getArea(pos){
+//	showPosition(position);
+//	var pos = {lat: position.coords.latitude, lng:position.coords.longitude};
+//	pos[0] = [lat - 0.005, lng - 0.005];
+//	pos[1] = [lat - 0.005, lng + 0.005];
+//	pos[2] = [lat + 0.005, lng + 0.005];
+//	pos[3] = [lat + 0.005, lng - 0.005];
+//	return pos;
+//}
 
 function showError(error){
 	switch(error.code){
