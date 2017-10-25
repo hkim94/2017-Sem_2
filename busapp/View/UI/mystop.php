@@ -70,7 +70,7 @@ session_start();
           <li><a href="mygocard.php"><i class="material-icons">credit_card</i>Go Card</a></li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="small material-icons" style="color:white; margin:10px;">menu</i></a>
-        <a class="modal-trigger" href="#modal5"><i class="small material-icons" style="color:white; margin:10px; float:right;">add</i></a>
+        <a class="modal-trigger" href="#modal5" onClick="getLocation()"><i class="small material-icons" style="color:white; margin:10px; float:right;">add</i></a>
       </div>
       <?php
       	}
@@ -92,11 +92,11 @@ session_start();
                 	<h6 style="text-align:right; color:#999">ADD TO FAVOURITE</h6>
                 </div>
                 <div style="margin:5%;">
-                    <form id="gpsform">
+                    <form id="gpsform" method="post" action="../../Controller/F_stop_Select.php">
                         <input type="text" id="lat" name="LATITUDE" >
-                        <input type="text" id="log" name="LONGITUDE">            	
+                        <input type="text" id="long" name="LONGITUDE">            	
                         <button type="submit" style="border:none;">
-                            <span class="search" onClick="getLocation()" style="cursor:pointer;">
+                            <span class="search" style="cursor:pointer;">
                                 <a class="waves-effect waves-light btn" style="background-color:rgb(123, 193, 68); width:100%;">
                                 <i class="material-icons right">location_searching</i>SEARCH STOPS</a>
                             </span>
@@ -172,25 +172,22 @@ $(document).ready(function(){
 //	  });
 //	});
 	
-//	$('.search').click(function(){
-//	  $.ajax({
-//	   url:'../../Controller/F_stop_Select.php',
-//	   type: 'POST',
-//	   success: function (data) {
-//		   alert(data);
-//	   } 
-//	  });
-//	});
-	
-	// POST to Database to select bus stop
-	//$("#gpsform").ajaxSubmit({url: '../../Controller/F_stop_Select.php', type: 'post'})
+	$('.search').click(function(){
+	  $.ajax({
+	   url:'../../Controller/F_stop_Select.php',
+	   type: 'POST',
+	   success: function (data) {
+		   alert(data);
+	   } 
+	  });
+	});
 	
  });
 
 // GET Lat & Log value of current position
 var x = document.getElementById("mylocation");
 var y = document.getElementById("lat");
-var z = document.getElementById("log");
+var z = document.getElementById("long");
 function getLocation(){
 	if (navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -199,8 +196,8 @@ function getLocation(){
 	}
 }
 function showPosition(position){
-	y.value = "Latitude: " + position.coords.latitude;
-	z.value = "Longitude: " + position.coords.longitude;
+	y.value = position.coords.latitude;
+	z.value = position.coords.longitude;
 }
 
 //function getArea(pos){
