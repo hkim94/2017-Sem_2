@@ -118,19 +118,16 @@ session_start();
 	  			foreach ($result as $user){
 		  		$count++;
 	  		?>
-            <div style="border-bottom:thin solid #CCC; ">
-            	<div style="margin:5%; display:inline-block; width:30%;">
-                	<img src="../image/bus_img.jpg" alt="" style="width:100%; border-radius:5px;">
-                </div>
-                <div style="display:inline-block; float:left; margin-top:8%; width:20%;">
-                	<div onClick="fav_toggle()" id="fav1"><i class="material-icons">favorite_border</i></div>
-                    <div onClick="fav_toggle()" id="fav2" style="display:none;"><i class="material-icons">favorite</i></div>
-                </div>
-                <div style="display:inline-block; float:left; margin-top:3%; width:40%;">
-                	<h6 style="display:inline-block; font-weight:bold;">ROUTE CODE</h6><br>
-					No. <?php echo $user['busno'];?>
-                </div>
-            </div>    
+            <form action="../../Controller/F_bus_Insert.php" method="post" style="border-bottom:1px solid #D4D4D4;">
+            	<label style="font-size:14px; font-weight:bold;">ROUTE CODE</label>
+                <input type="text" value="<?php echo $user['busno'];?>" disabled style="border:none; width:auto; margin:0px;"> 
+            	<input type="hidden" name="busno" value="<?php echo $user['busno'];?>" >
+                <input type="hidden" name="userID" value="<?php echo $_SESSION['userID'];?>">
+                <button type="submit" style="margin-bottom:3%; border:none; background-color:white; float:right;">
+                	<i class="material-icons">favorite_border</i>
+                </button>
+            </form>
+           
             <?php
 				}
 			?>

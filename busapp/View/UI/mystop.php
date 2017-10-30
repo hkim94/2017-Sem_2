@@ -92,27 +92,24 @@ session_start();
                 	<h6 style="text-align:right; color:#999">ADD TO FAVOURITE</h6>
                 </div>
                 <div style="margin:5%;">
-                    <form id="gpsform" method="post" action="../../Controller/F_stop_Select.php">
-                        <input type="text" id="lat" name="LATITUDE" >
-                        <input type="text" id="long" name="LONGITUDE">            	
-                        <button type="submit" style="border:none;">
-                            <span class="search" style="cursor:pointer;">
-                                <a class="waves-effect waves-light btn" style="background-color:rgb(123, 193, 68); width:100%;">
-                                <i class="material-icons right">location_searching</i>SEARCH STOPS</a>
-                            </span>
-                        </button>
-                    </form>
+                    <form id="gpsform">
+                        <input type="hidden" id="LATITUDE" name="LATITUDE" >
+                        <input type="hidden" id="LONGITUDE" name="LONGITUDE">
+                        <input class="waves-effect waves-light btn" type="button" value="SEARCH STOPS" onClick="findStop()" style="background-color:rgb(123, 193, 68); width:100%;">
+      				</form>
+                    <div id="result"></div>
                 </div>
-
             </div>
             <div class="modal-footer">
               <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
             </div>
        </div>
       
+      <div id="result"></div>
+      
       <?php
 	  require_once("../../Model/db.php");
-	  $result = $conn ->query("SELECT * FROM `favourite_stop` LEFT JOIN `stop` ON `favourite_stop`.`stopNo` = `stop`.`stopID`", PDO::FETCH_ASSOC);
+	  $result = $conn ->query("SELECT * FROM `favourite_stop` LEFT JOIN `stop` ON `favourite_stop`.`stopID` = `stop`.`stopID`", PDO::FETCH_ASSOC);
 	  $count = 0;
 	  foreach ($result as $user){
 		  $count++;
@@ -132,7 +129,7 @@ session_start();
                 <p><strong>Detail:</strong> <?php echo $user['DESCRIPTION'];?></p>
         	</div>
       	</div>
-	  </section>
+	  </section>      
 	  <?php
       }
 	  ?>
@@ -161,33 +158,27 @@ $(document).ready(function(){
 	   }
 	  });
 	 });
+});
 
-//	$('.search').click(function(){
-//	  $.ajax({
-//	   url:'../../Controller/F_stop_Select.php',
-//	   type: 'GET',
-//	   success: function (data) {
-//		   alert(data);
-//	   } 
-//	  });
-//	});
-	
-	$('.search').click(function(){
+function findStop(){
 	  $.ajax({
 	   url:'../../Controller/F_stop_Select.php',
+	   data:{
+		   LATITUDE: $("#LATITUDE").val(),
+		   LONGITUDE:$("#LONGITUDE").val()
+	   },
 	   type: 'POST',
 	   success: function (data) {
-		   alert(data);
-	   } 
-	  });
+		   $("#result").html(data);
+	   }
 	});
-	
- });
+}
 
 // GET Lat & Log value of current position
 var x = document.getElementById("mylocation");
-var y = document.getElementById("lat");
-var z = document.getElementById("long");
+var y = document.getElementById("LATITUDE");
+var z = document.getElementById("LONGITUDE");
+
 function getLocation(){
 	if (navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -199,16 +190,6 @@ function showPosition(position){
 	y.value = position.coords.latitude;
 	z.value = position.coords.longitude;
 }
-
-//function getArea(pos){
-//	showPosition(position);
-//	var pos = {lat: position.coords.latitude, lng:position.coords.longitude};
-//	pos[0] = [lat - 0.005, lng - 0.005];
-//	pos[1] = [lat - 0.005, lng + 0.005];
-//	pos[2] = [lat + 0.005, lng + 0.005];
-//	pos[3] = [lat + 0.005, lng - 0.005];
-//	return pos;
-//}
 
 function showError(error){
 	switch(error.code){
@@ -227,13 +208,5 @@ function showError(error){
 	}
 }
 
-function showStop(){
-	//ajax GET data WHERE Latitude +0.005 & -0.005 Logitude +0.005 & - 0.005
-	//display in innerHTML
-}
-
-
-
 </script>
-
 </html>

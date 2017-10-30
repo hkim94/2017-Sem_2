@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2017 at 04:14 AM
+-- Generation Time: Oct 30, 2017 at 03:46 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -71,10 +71,10 @@ CREATE TABLE `favourite_bus` (
 --
 
 INSERT INTO `favourite_bus` (`f_BusID`, `busno`, `userID`) VALUES
-(1, '111', 37),
 (2, '130', 37),
 (3, '155', 37),
-(4, '180', 37);
+(4, '180', 37),
+(11, '111', 37);
 
 -- --------------------------------------------------------
 
@@ -84,9 +84,16 @@ INSERT INTO `favourite_bus` (`f_BusID`, `busno`, `userID`) VALUES
 
 CREATE TABLE `favourite_stop` (
   `f_StopID` int(10) NOT NULL,
-  `stopNo` int(6) NOT NULL,
+  `stopID` int(6) NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `favourite_stop`
+--
+
+INSERT INTO `favourite_stop` (`f_StopID`, `stopID`, `userID`) VALUES
+(1, 12, 37);
 
 -- --------------------------------------------------------
 
@@ -7545,9 +7552,9 @@ ALTER TABLE `favourite_bus`
 --
 ALTER TABLE `favourite_stop`
   ADD PRIMARY KEY (`f_StopID`),
-  ADD KEY `stopNo` (`stopNo`),
+  ADD KEY `stopNo` (`stopID`),
   ADD KEY `userID` (`userID`),
-  ADD KEY `stopNo_2` (`stopNo`),
+  ADD KEY `stopNo_2` (`stopID`),
   ADD KEY `userID_2` (`userID`);
 
 --
@@ -7589,12 +7596,12 @@ ALTER TABLE `alert`
 -- AUTO_INCREMENT for table `favourite_bus`
 --
 ALTER TABLE `favourite_bus`
-  MODIFY `f_BusID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `f_BusID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `favourite_stop`
 --
 ALTER TABLE `favourite_stop`
-  MODIFY `f_StopID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `f_StopID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `stop`
 --
@@ -7613,14 +7620,14 @@ ALTER TABLE `users`
 -- Constraints for table `favourite_bus`
 --
 ALTER TABLE `favourite_bus`
-  ADD CONSTRAINT `favourite_bus_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
-  ADD CONSTRAINT `favourite_bus_ibfk_2` FOREIGN KEY (`busno`) REFERENCES `bus` (`busno`);
+  ADD CONSTRAINT `favourite_bus_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
 
 --
 -- Constraints for table `favourite_stop`
 --
 ALTER TABLE `favourite_stop`
-  ADD CONSTRAINT `favourite_stop_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
+  ADD CONSTRAINT `favourite_stop_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
+  ADD CONSTRAINT `favourite_stop_ibfk_2` FOREIGN KEY (`stopID`) REFERENCES `stop` (`stopID`);
 
 --
 -- Constraints for table `gocard`
