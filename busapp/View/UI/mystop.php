@@ -60,7 +60,6 @@ session_start();
           </li>
           <li><a class="subheader">Bus</a></li>
           <li><a href="search.php"><i class="material-icons">search</i>Search</a></li>
-          <li><a href="alert.php"><i class="material-icons">error_outline</i>Alert</a></li>
 
           <li><div class="divider"></div></li>
           <li><a class="subheader">My Page</a></li>

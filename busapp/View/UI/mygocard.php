@@ -80,7 +80,6 @@ session_start();
           </li>
           <li><a class="subheader">Bus</a></li>
           <li><a href="search.php"><i class="material-icons">search</i>Search</a></li>
-          <li><a href="alert.php"><i class="material-icons">error_outline</i>Alert</a></li>
 
           <li><div class="divider"></div></li>
           <li><a class="subheader">My Page</a></li>
@@ -174,11 +173,11 @@ session_start();
 						}
 					 ?>
                         <div class="input-field col s12">
-                            <input name="conID" type="text" class="validate" required>
+                            <input name="conID" type="text" class="validate" pattern="[0-9]{8,16}">
                             <label for="conID" data-error="wrong" data-success="right">Concession ID</label>
                         </div>
                         <div class="input-field col s12">
-                        	<select name="conType">
+                        	<select name="conType" required>
                                 <option value="" disabled selected>Choose your option</option>
                             	<option value="student">Student</option>
                                 <option value="senior">Senior</option>
@@ -188,7 +187,7 @@ session_start();
                             <label>Concession Type</label>
                         </div>
                         <div class="input-field col s12">
-                            <input name="organisation" type="text" class="validate" required>
+                            <input name="organisation" type="text" class="validate" pattern="[a-z]{2,50}">
                             <label for="organisation" data-error="wrong" data-success="right">Organisation</label>
                         </div>
                         <div class="input-field col s12">

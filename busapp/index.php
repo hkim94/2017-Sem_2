@@ -86,7 +86,7 @@
 
     <!-- Registration -->
     <div class="row">
-	    <form action="Controller/pdoReg.php" method="post" class="col s12">
+	    <form action="Controller/pdoReg.php" method="post" class="col s12" name="registerForm" onSubmit="return validateForm()">
     	    <div id="modal1" class="modal modal-fixed-footer">
         	    <div class="modal-content"> 
             	    <!-- inputs -->
@@ -94,19 +94,19 @@
                         <!-- Go Card number -->
                         <div class="row">
                             <div class="input-field col s12"> <i class="material-icons prefix">credit_card</i>
-                                <input id="gocardno" name="gocardno" type="text" class="validate" required>
+                                <input id="gocardno" name="gocardno" type="text" class="validate" pattern="[0-9]{16}">
                                 <label for="gocardno" data-error="wrong" data-success="right">Gocard Number</label>
                             </div>
                         </div>
                         <!-- Username -->
                         <div class="row">
                             <div class="input-field col s12"> <i class="material-icons prefix">account_circle</i>
-                                <input id="username" name="username" type="text" class="validate" required>
+                                <input id="username" name="username" type="text" class="validate" pattern="[A-Za-z0-9]{3,15}">
                                 <label for="username" data-error="wrong" data-success="right">Username</label>
                             </div>
                          <!-- Password -->
                             <div class="input-field col s12"> <i class="material-icons prefix">lock</i>
-                                <input id="password" name="password" type="password" class="validate" required>
+                                <input id="password" name="password" type="password" class="validate" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                                 <label for="password" data-error="wrong" data-success="right">Password</label>
                             </div>
                         </div>
@@ -114,11 +114,11 @@
                         <!-- User's Name -->
                         <div class="row">
                             <div class="input-field col s12"> <i class="material-icons prefix">account_circle</i>
-                                <input id="fname" name="fname" type="text" class="validate" required>
+                                <input id="fname" name="fname" type="text" class="validate" pattern="[a-z]{2,25}">
                                 <label for="fname" data-error="wrong" data-success="right">First Name</label>
                             </div>            
                             <div class="input-field col s12"> <i class="material-icons prefix">account_circle</i>
-                                <input id="lname" name="lname" type="text" class="validate" required>
+                                <input id="lname" name="lname" type="text" class="validate" pattern="[a-z]{2,25}">
                                 <label for="lname" data-error="wrong" data-success="right">Last Name</label>
                             </div>
                         </div>
@@ -126,11 +126,11 @@
                         <!-- Email and Phone -->
                         <div class="row">
                             <div class="input-field col s12"> <i class="material-icons prefix">email</i>
-                                <input id="email" name="email" type="email" class="validate" required>
+                                <input id="email" name="email" type="email" class="validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                                 <label for="email" data-error="wrong" data-success="right">Email</label>
                             </div>
                             <div class="input-field col s12"> <i class="material-icons prefix">phone</i>
-                                <input id="phone" name="mobile" type="tel" class="validate" required>
+                                <input id="phone" name="mobile" type="tel" class="validate" pattern="[0-9]{10}">
                                 <label for="phone" data-error="wrong" data-success="right">Phone</label>
                             </div>
                         </div>
@@ -144,17 +144,17 @@
     </div>
     
     <!-- Login Form -->
-    <form action="Controller/pdoLogin.php" method="post" class="col s12">
+    <form action="Controller/pdoLogin.php" method="post" class="col s12" name="loginForm" onSubmit="return validateLogin()">
 	    <div id="modal2" class="modal modal-fixed-footer">
     		<div class="modal-content">
         	    <div class="row">    
                     <div class="row">
                         <div class="input-field col s12"> <i class="material-icons prefix">account_circle</i>
-                            <input id="loginID" name="username" type="text" class="validate" required>
+                            <input id="loginID" name="username" type="text" class="validate">
                             <label for="loginID">Username</label>
                         </div>
                         <div class="input-field col s12"> <i class="material-icons prefix">lock</i>
-                            <input id="password" name="password" type="password" class="validate" required>
+                            <input id="password" name="password" type="password" class="validate">
                             <label for="password">Password</label>
                         </div>
                         	<input type="hidden" name="login">
@@ -169,3 +169,56 @@
 	</form>
 </body>
 </html>
+
+<script>
+function validateForm() {
+    var a = document.forms["registerForm"]["gocardno"].value;
+	var b = document.forms["registerForm"]["username"].value;
+	var c = document.forms["registerForm"]["password"].value;
+	var d = document.forms["registerForm"]["fname"].value;
+	var e = document.forms["registerForm"]["lname"].value;
+	var f = document.forms["registerForm"]["email"].value;
+	var g = document.forms["registerForm"]["mobile"].value;
+    if (a == "") {
+        alert("Gocard number must be filled out");
+        return false;
+    }
+	if (b == "") {
+        alert("Username number must be filled out");
+        return false;
+    }
+	if (c == "") {
+        alert("Password number must be filled out");
+        return false;
+    }
+	if (d == "") {
+        alert("First name must be filled out");
+        return false;
+    }
+	if (e == "") {
+        alert("Last name must be filled out");
+        return false;
+    }
+	if (f == "") {
+        alert("Email address must be filled out");
+        return false;
+    }
+	if (g == "") {
+        alert("Mobile number must be filled out");
+        return false;
+    }
+}
+
+function validateLogin(){
+	var h = document.forms["loginForm"]["username"].value;
+	var i = document.forms["loginForm"]["password"].value;
+	if (h == "") {
+        alert("Username must be provided");
+        return false;
+    }
+	if (i == "") {
+        alert("Password must be provided");
+        return false;
+    }
+}
+</script>

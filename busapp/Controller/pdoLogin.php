@@ -18,7 +18,9 @@ if(isset($_POST['login'])){
 	$_SESSION['userID'] = $results['userID'];
 	
 	if ($password_hash != $results['password']){
+		?>
 		echo "Error: Your Password is incorrect.<br>";
+        <?php
 	}
 	else if($username != $results['username']){
 		echo "Error: Your Username is incorrect.<br>";

@@ -90,7 +90,6 @@ session_start();
           </li>
           <li><a class="subheader">Bus</a></li>
           <li><a href="search.php"><i class="material-icons">search</i>Search</a></li>
-          <li><a href="alert.php"><i class="material-icons">error_outline</i>Alert</a></li>
 
           <li><div class="divider"></div></li>
           <li><a class="subheader">My Page</a></li>
@@ -119,7 +118,7 @@ session_start();
 		  		$count++;
 	  		?>
             <form action="../../Controller/F_bus_Insert.php" method="post" style="border-bottom:1px solid #D4D4D4;">
-            	<label style="font-size:14px; font-weight:bold;">ROUTE CODE</label>
+            	<label style="font-size:14px; font-weight:bold;">ROUTE CODE</label><br>
                 <input type="text" value="<?php echo $user['busno'];?>" disabled style="border:none; width:auto; margin:0px;"> 
             	<input type="hidden" name="busno" value="<?php echo $user['busno'];?>" >
                 <input type="hidden" name="userID" value="<?php echo $_SESSION['userID'];?>">

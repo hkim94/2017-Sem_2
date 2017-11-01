@@ -13,19 +13,52 @@ session_start();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <style>
-	#search_bar > input[type=text] {
-		width: 80%;
-		background-color:white;
-		box-sizing: border-box;
-		border-radius:10pt;
-		border: 2px solid rgb(123, 193, 68);
-		font-size: 16px;
-		color:white;
-		padding-left:10%;
+	table{
+		margin-top:10%;
+		height:100%;
 	}
+	
+	table > tbody > tr{
+		height:118px;
+	}
+	
+    table > tbody > tr:nth-child(even){
+      background-image:url(../image/bus_R1.png);
+	  background-repeat:no-repeat;
+	  background-size: auto;
+    }
 
-	input[type=text]:focus {
-		border-bottom:2px solid red;
+    table > tbody >tr:nth-child(odd){
+      background-image:url(../image/bus_L1.png);
+	  background-repeat:no-repeat;
+	  background-size: auto;
+    }
+
+    table > tbody > tr:first-child{
+      background-image:url(../image/start.png);
+	  background-repeat:no-repeat;
+	  background-size:auto;
+    }
+
+    table > tbody >tr:last-child{
+      background-image:url(../image/end.png);
+	  background-repeat:no-repeat;
+      background-size: auto;
+    }
+	
+	td{
+		text-indent:125px;
+	}
+	
+	.tabs .tab a{
+		color:rgba(123, 193, 68, 0.8);
+	}
+	
+	.tabs .tab a:hover, .tabs .tab a.active {
+		color:rgb(123, 193, 68);
+	}
+	.tabs .indicator{
+		background-color:rgb(123, 193, 68);
 	}
 
 	</style>
@@ -39,19 +72,22 @@ session_start();
     })(jQuery);
 
     $(".button-collapse").sideNav();
-
     $('.button-collapse').sideNav('show');
     // Hide sideNav
     $('.button-collapse').sideNav('hide');
     // Destroy sideNav
     $('.button-collapse').sideNav('destroy');
+	
+	$(document).ready(function(){
+		$('.modal').modal();
+	});
 
-    </script>
+  </script>
   </head>
 
   <body>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-      <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
+      <div style="background-color:rgb(123, 193, 68);">
         <ul id="slide-out" class="side-nav">
          <?php
                 require('../../Model/db.php');
@@ -88,34 +124,28 @@ session_start();
       	}
 	  ?>
       
-      <div class="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
-      	<div class="row">
-        	<div class="col s2"></div>
-            <div class="col s8">
-            	<h4 style="text-align:center; color:white; font-size:15pt;">SEARCH</h4>
-      		</div>
-      		<div class="col s2"></div>
-  		</div>
-        <div class="row">
-        	<div class="col s1"></div>
-            <div class="col s10" id="search_bar">
-            	<div class="search">
-            		<input type="text" name="search" placeholder="Search Bus Number.." style="display:inline-block; position:relative;">
-                	<input type="button" style="display:inline-block; position:absolute; margin-top:3%; padding-top:2%; padding-bottom:2%; background-color:white;" value="SEARCH">
-                </div>
-                <div style="width:100%; border-top:1px solid white; padding-bottom:8%;"></div>
-                <input type="text" name="search" placeholder="Search stop.." style="display:inline-block; position:relative;">
-                <input type="button" style="display:inline-block; position:absolute; margin-top:3%; padding-top:2%; padding-bottom:2%; background-color:white;" value="SEARCH">
-                <p style="text-align:center; color:white;">OR</p>
-                <select>
-                </select>
-      		</div>
-      		<div class="col s1"></div>
-  		</div>  
-      </div>
+      <div id="graph"></div>
       
-      <script>
-	  </script>
+      <div class="row">
+      	<div class="col s12" style="padding:5%; color:white; background-color:rgb(123, 193, 68); position:absolute; bottom:0;">
+        	Arrival Time
+        </div>
+      </div>
       
 </body>
 </html>
+<script>
+function showRoute(){
+	  $.ajax({
+	   url:'../../Controller/F_stop_Select.php',
+	   data:{
+		   LATITUDE: $("#LATITUDE").val(),
+		   LONGITUDE:$("#LONGITUDE").val()
+	   },
+	   type: 'GET',
+	   success: function (data) {
+		   $("#graph").html(data);
+	   }
+	});
+}
+</script>
