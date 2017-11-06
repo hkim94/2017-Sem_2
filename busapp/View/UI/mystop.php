@@ -113,10 +113,10 @@ session_start();
 	  foreach ($result as $user){
 		  $count++;
 	  ?>
-      <section class="card horizontal" style="margin:5%; width:auto; height:110px;">
+      <section class="card horizontal" style="margin:5%; width:auto; height:130px;">
       	<div class="card-image" style="background-color:rgb(248, 151, 40); width:20%;">
       		<div class="center-align">
-        		<i class="small material-icons" style="color:white; transform: translateY(140%);">nature</i>
+        		<i class="small material-icons" style="color:white; transform: translateY(150%);">nature</i>
         	</div>
       	</div>
         <div class="card-stacked">
