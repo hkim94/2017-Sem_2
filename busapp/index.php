@@ -114,11 +114,11 @@
                         <!-- User's Name -->
                         <div class="row">
                             <div class="input-field col s12"> <i class="material-icons prefix">account_circle</i>
-                                <input id="fname" name="fname" type="text" class="validate" pattern="[a-z]{2,25}">
+                                <input id="fname" name="fname" type="text" class="validate" pattern="[Aa-Zz]{2,25}">
                                 <label for="fname" data-error="wrong" data-success="right">First Name</label>
                             </div>            
                             <div class="input-field col s12"> <i class="material-icons prefix">account_circle</i>
-                                <input id="lname" name="lname" type="text" class="validate" pattern="[a-z]{2,25}">
+                                <input id="lname" name="lname" type="text" class="validate" pattern="[Aa-Zz]{2,25}">
                                 <label for="lname" data-error="wrong" data-success="right">Last Name</label>
                             </div>
                         </div>

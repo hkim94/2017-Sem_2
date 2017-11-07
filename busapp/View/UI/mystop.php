@@ -122,7 +122,6 @@ session_start();
         <div class="card-stacked">
         	<div class="card-content" style="padding:15px;">
             	<span class="delete" style="cursor:pointer;" id='del_<?php echo $user['f_StopID'];?>'><i class="small material-icons" style="color:rgb(123, 193, 68); float:right;">clear</i></span>
-            	<p style="font-size:11pt; font-weight:bold;">Favourite Stop #<?php echo $user['f_StopID'];?></p>
                 <p><strong>Street:</strong> <?php echo $user['STREET_NAME'];?></p>
                 <p><strong>Suburb:</strong> <?php echo $user['SUBURB'];?></p>
                 <p><strong>Detail:</strong> <?php echo $user['DESCRIPTION'];?></p>

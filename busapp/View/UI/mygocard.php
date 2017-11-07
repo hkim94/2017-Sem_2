@@ -173,7 +173,7 @@ session_start();
 						}
 					 ?>
                         <div class="input-field col s12">
-                            <input name="conID" type="text" class="validate" pattern="[0-9]{8,16}">
+                            <input name="conID" type="text" class="validate" pattern="[0-9]{17}">
                             <label for="conID" data-error="wrong" data-success="right">Concession ID</label>
                         </div>
                         <div class="input-field col s12">
@@ -187,7 +187,7 @@ session_start();
                             <label>Concession Type</label>
                         </div>
                         <div class="input-field col s12">
-                            <input name="organisation" type="text" class="validate" pattern="[a-z]{2,50}">
+                            <input name="organisation" type="text" class="validate" pattern="[Aa-Zz]{2,50}">
                             <label for="organisation" data-error="wrong" data-success="right">Organisation</label>
                         </div>
                         <div class="input-field col s12">
@@ -253,17 +253,15 @@ session_start();
     </div>
     
     <script  type="text/javascript">
-	//concession hide and show
-	
 		function concess(){
 			var conID ='<?php echo $row['conID'];?>';
-			if (conID =''){
-				document.getElementById("applybtn").style.display="block";
-				document.getElementById("viewbtn").style.display="none";
-			}else{
+			if (conID !=""){
 				document.getElementById("applybtn").style.display="none";
 				document.getElementById("viewbtn").style.display="block";
-			}	
+			}else{
+				document.getElementById("applybtn").style.display="block";
+				document.getElementById("viewbtn").style.display="none";
+			}
 		};
 	</script>
     

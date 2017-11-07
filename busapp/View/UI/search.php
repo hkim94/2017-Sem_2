@@ -97,7 +97,7 @@ session_start();
     </script>
   </head>
 
-  <body onLoad="arrivalbtn()">
+  <body>
   <meta name="viewport" content="width=device-width, initial-scale=1">
       <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40));">
         <ul id="slide-out" class="side-nav">
@@ -136,9 +136,9 @@ session_start();
       	}
 	  ?>
       
-      <div class="mainpage" id="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%; height:100vh;padding-top:5%;">
+      <div class="mainpage" id="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%; height:100%; padding-top:5%;">
         <div class="row">
-        	<form>
+        	<form id="busSearch">
                 <div class="col s1"></div>
                 <div class="col s8">
                     <div class="search">
@@ -179,7 +179,7 @@ session_start();
       
       <div class="row" style="margin-bottom:0px;" id="arrival_btn">
         <div class="col s12" style="background-color:rgb(248, 151, 40);">
-            <a onClick="displayGraph()" style="text-decoration:none; text-align:center; display:block; color:white; padding:3%; font-size:15pt;">PREDICT ARRIVAL TIME</a>
+            <a onClick="displayGraph(); displayRoute();" style="text-decoration:none; text-align:center; display:block; color:white; padding:3%; font-size:15pt;">PREDICT ARRIVAL TIME</a>
         </div>
       </div>
       
@@ -191,14 +191,14 @@ session_start();
   </body>
 </html>
 
-<script>
-function arrivalbtn(){
-	if ($('#result').is(':empty') || $('#result2').is(':empty')){
-		$('#arrival_btn').hide();
-	}else{
-		$('#arrival_btn').show();
-	}
-}
+<script>//
+//function arrivalbtn(){
+//	if ($('#result').is(':empty') | $('#result2').is(':empty')){
+//		$('#arrival_btn').hide();
+//	}else{
+//		$('#arrival_btn').show();
+//	}
+//}
 
 function displayGraph(){
 	 document.getElementById("mainpage").style.display = "none";
@@ -235,13 +235,11 @@ function myLocation(){
 }
 
 function displayRoute(){
+	 var formValue = $("#result1, #result2").serialize();
 	$.ajax({
 	   url:'../../Controller/Get_MyLocation.php',
-	   data:{
-		   busNo:$("#busNo").val(),
-		   stopID:$("#stopID").val()
-	   },
-	   type: 'GET',
+	   data:formValue,
+	   type: 'POST',
 	   success: function (data) {
 		   $("#result3").html(data);
 	   }
