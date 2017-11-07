@@ -60,7 +60,7 @@
     </script>
     </head>
 
-    <body style="background-image:url(View/image/index_bg2.svg); background-size:cover; background-repeat:no-repeat;">
+    <body style="background-image:url(View/image/index_bg2_animated.svg); background-size:cover; background-repeat:no-repeat;">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- Modal Trigger -->

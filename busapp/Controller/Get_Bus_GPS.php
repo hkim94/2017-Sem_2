@@ -3,8 +3,8 @@ session_start();
 require_once("../Model/db.php");
 require_once("../Model/pdoFunction.php");
 
-$busNo = !empty($_POST['busNo'])? test_user_input(($_POST['busNo'])):null;
-$sql = "SELECT LATITUDE, LONGITUDE FROM `location_bus` WHERE busNo=$busNo IN (SELECT * FROM `stop` WHERE LATITUDE - LATITUDE <= 0.00005 AND LONGITUDE - LONGITUDE <= 0.00005 LIMIT 1";
+$busNo = !empty($_GET['busNo'])? test_user_input(($_GET['busNo'])):null;
+$sql = "SELECT LATITUDE, LONGITUDE FROM `location_bus` WHERE busNo=$busNo";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -15,9 +15,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div style="border:2px groove white; padding:10px;">
 	<p style="color:white; margin:0px; padding:0px;">CURRENT LOCATION OF BUS</p>
     <div>
-        <p><?php echo $val['STREET_NAME']?></p>
-        <p><?php echo $val['SUBURB'];?></p>
-        <p><?php echo $val['DESCRIPTION'];?></p>
+        <p><?php echo $val['LATITUDE']?></p>
+        <p><?php echo $val['LONGITUDE'];?></p>
     </div>
 </div>
 

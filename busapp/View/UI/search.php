@@ -97,7 +97,7 @@ session_start();
     </script>
   </head>
 
-  <body>
+  <body onLoad="arrivalbtn()">
   <meta name="viewport" content="width=device-width, initial-scale=1">
       <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40));">
         <ul id="slide-out" class="side-nav">
@@ -192,16 +192,18 @@ session_start();
 </html>
 
 <script>
+function arrivalbtn(){
+	if ($('#result').is(':empty') || $('#result2').is(':empty')){
+		$('#arrival_btn').hide();
+	}else{
+		$('#arrival_btn').show();
+	}
+}
+
 function displayGraph(){
 	 document.getElementById("mainpage").style.display = "none";
 	 document.getElementById("arrival_btn").style.display = "none";
 	 document.getElementById("graphpage").style.display = "block";
-}
-
-function displaySearch(){
-	document.getElementById("mainpage").style.display = "block";
-	document.getElementById("arrival_btn").style.display = "block";
-	document.getElementById("graphpage").style.display = "none";
 }
 
 function trackbus(){
@@ -210,7 +212,8 @@ function trackbus(){
 	   data:{
 		   busNo:$("#busNo").val()
 	   },
-	   type: 'POST',
+	   datatype:"json",
+	   type: 'GET',
 	   success: function (data) {
 		   $("#result").html(data);
 	   }
