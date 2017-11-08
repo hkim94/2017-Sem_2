@@ -108,21 +108,23 @@ session_start();
       
       <?php
 	  require_once("../../Model/db.php");
-	  $result = $conn ->query("SELECT * FROM `favourite_stop` LEFT JOIN `stop` ON `favourite_stop`.`stopID` = `stop`.`stopID`", PDO::FETCH_ASSOC);
-	  $count = 0;
-	  foreach ($result as $user){
-		  $count++;
+	  if(isset($_SESSION['userID'])){
+		$userID = $_SESSION['userID'];
+		$result = $conn->prepare("SELECT * FROM `favourite_stop` LEFT JOIN `stop` ON `stop`.`stopID` = `favourite_stop`.`stopID` WHERE `favourite_stop`.userID = :userID");
+		$result ->execute(array(':userID' => $userID));
+		$count = 0;
+		foreach ($result as $user){
+			$count++;
 	  ?>
-      <section class="card horizontal" style="margin:5%; width:auto; height:110px;">
+      <section class="card horizontal" style="margin:5%; width:auto; height:130px;">
       	<div class="card-image" style="background-color:rgb(248, 151, 40); width:20%;">
       		<div class="center-align">
-        		<i class="small material-icons" style="color:white; transform: translateY(140%);">nature</i>
+        		<i class="small material-icons" style="color:white; transform: translateY(150%);">nature</i>
         	</div>
       	</div>
         <div class="card-stacked">
         	<div class="card-content" style="padding:15px;">
             	<span class="delete" style="cursor:pointer;" id='del_<?php echo $user['f_StopID'];?>'><i class="small material-icons" style="color:rgb(123, 193, 68); float:right;">clear</i></span>
-            	<p style="font-size:11pt; font-weight:bold;">Favourite Stop #<?php echo $user['f_StopID'];?></p>
                 <p><strong>Street:</strong> <?php echo $user['STREET_NAME'];?></p>
                 <p><strong>Suburb:</strong> <?php echo $user['SUBURB'];?></p>
                 <p><strong>Detail:</strong> <?php echo $user['DESCRIPTION'];?></p>
@@ -130,33 +132,35 @@ session_start();
       	</div>
 	  </section>      
 	  <?php
-      }
+      	}
+	  }
 	  ?>
 </body>
 
 <script>
-//Delete favrourite stop
 $(document).ready(function(){
  // Delete 
-	 $('.delete').click(function(){
-	  var el = this;
-	  var id = this.id;
-	  var splitid = id.split("_");
-	  // Delete id
-	  var deleteid = splitid[1];
-	  // AJAX Request
-	  $.ajax({
-	   url: '../../Controller/F_stop_Delete.php',
-	   type: 'POST',
-	   data: { f_StopID:deleteid },
-	   success: function(response){	
-		$(el).closest('section').css('background','rgb(248, 151, 40)');
-		$(el).closest('section').fadeOut(800, function(){ 
-		 $(this).remove();
-		});
-	   }
-	  });
-	 });
+ $('.delete').click(function(){
+  var el = this;
+  var id = this.id;
+  var splitid = id.split("_");
+
+  // Delete id
+  var deleteid = splitid[1];
+  $.ajax({
+   url: '../../Controller/F_stop_Delete.php',
+   type: 'POST',
+   data: { f_StopID:deleteid },
+   success: function(response){
+
+    // Removing row from HTML Table
+    $(el).closest('section').css('background','rgb(248, 151, 40)');
+    $(el).closest('section').fadeOut(800, function(){ 
+     $(this).remove();
+    });
+   }
+  });
+ });
 });
 
 function findStop(){

@@ -141,7 +141,7 @@ session_start();
                   <div class="col s1"></div>
                   <div class="input-field col s10">
                      <i class="material-icons prefix">account_circle</i>
-                     <input type="text" id="fname" name="fname" value="<?php echo $row['fname'];?>">
+                     <input type="text" id="fname" name="fname" value="<?php echo $row['fname'];?>" pattern="[Aa-Zz]{2,25}" required>
                   </div>
                   <div class="col s1"></div>
                 </div>
@@ -150,7 +150,7 @@ session_start();
                   <div class="col s1"></div>
                   <div class="input-field col s10">
                      <i class="material-icons prefix">account_circle</i>
-                     <input type="text" id="lname" name="lname" value="<?php echo $row['lname'];?>">
+                     <input type="text" id="lname" name="lname" value="<?php echo $row['lname'];?>" pattern="[Aa-Zz]{2,25}"  required>
                   </div>
                   <div class="col s1"></div>
                 </div>
@@ -160,7 +160,7 @@ session_start();
                     <div class="col s1"></div>
                     <div class="input-field col s10">
                         <i class="material-icons prefix">email</i>
-                        <input type="text" id="email" name="email" value="<?php echo $row['email'];?>">
+                        <input type="text" id="email" name="email" value="<?php echo $row['email'];?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
                     </div>
                     <div class="col s1"></div>
                  </div>
@@ -169,7 +169,7 @@ session_start();
                     <div class="col s1"></div>
                     <div class="input-field col s10">
                         <i class="material-icons prefix">phone</i>
-                        <input type="text" id="mobile" name="mobile" value="<?php echo $row['mobile'];?>">
+                        <input type="text" id="mobile" name="mobile" value="<?php echo $row['mobile'];?>" pattern="[0-9]{10}" required>
                     </div>
                     <div class="col s1"></div>
                  </div>

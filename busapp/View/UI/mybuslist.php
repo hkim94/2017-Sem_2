@@ -55,11 +55,11 @@ session_start();
 					if(response=="success"){
 						var row=document.getElementById("row"+id);
 						row.parentNode.removeChild(row);
-						}
-						}
-						});
-						}
-  	</script>
+					}
+				}
+		});
+	}
+  </script>
   </head>
 
   <body>
@@ -112,22 +112,25 @@ session_start();
                 </div>
             <?php
 	  			require_once("../../Model/db.php");
-	  			$result = $conn ->query('SELECT * FROM `bus`', PDO::FETCH_ASSOC);
-	  			$count = 0;
-	  			foreach ($result as $user){
-		  		$count++;
+				if(isset($_SESSION['userID'])){
+					$userID = $_SESSION['userID'];
+					$result = $conn->query('SELECT * FROM `bus`', PDO::FETCH_ASSOC);
+					$count = 0;
+					foreach ($result as $user){
+						$count++;
 	  		?>
             <form action="../../Controller/F_bus_Insert.php" method="post" style="border-bottom:1px solid #D4D4D4;">
             	<label style="font-size:14px; font-weight:bold;">ROUTE CODE</label><br>
-                <input type="text" value="<?php echo $user['busno'];?>" disabled style="border:none; width:auto; margin:0px;"> 
-            	<input type="hidden" name="busno" value="<?php echo $user['busno'];?>" >
-                <input type="hidden" name="userID" value="<?php echo $_SESSION['userID'];?>">
+                <input type="text" value="<?php echo $user['busNo'];?>" disabled style="border:none; width:auto; margin:0px;"> 
+            	<input type="hidden" name="busno" value="<?php echo $user['busNo'];?>" >
+                <input type="hidden" id="userID" name="userID" value="<?php echo $_SESSION['userID'];?>">
                 <button type="submit" style="margin-bottom:3%; border:none; background-color:white; float:right;">
                 	<i class="material-icons">favorite_border</i>
                 </button>
             </form>
            
             <?php
+				}
 				}
 			?>
             </div>
@@ -149,10 +152,13 @@ session_start();
           
       <?php
 	  require_once("../../Model/db.php");
-	  $result = $conn ->query('SELECT * FROM `favourite_bus`', PDO::FETCH_ASSOC);
-	  $count = 0;
-	  foreach ($result as $user){
-		  $count++;
+	  if(isset($_SESSION['userID'])){
+		$userID = $_SESSION['userID'];
+		$result = $conn->prepare("SELECT * FROM `favourite_bus` LEFT JOIN `users` ON `users`.`userID` = `favourite_bus`.`userID` WHERE `favourite_bus`.userID = :userID");
+		$result ->execute(array(':userID' => $userID));
+		$count = 0;
+		foreach ($result as $user){
+			$count++;
 	  ?>
       <section class="card horizontal" style="margin:5%; width:auto; height:80px;">
       	<div class="card-image" style="background-color:rgb(248, 151, 40); width:20%;">
@@ -163,13 +169,14 @@ session_start();
         <div class="card-stacked">
         	<div class="card-content" style="padding:15px;">
                 <span class="delete" style="cursor:pointer;" id='del_<?php echo $user['f_BusID'];?>'><i class="small material-icons" style="color:rgb(123, 193, 68); float:right;">clear</i></span>
-            	<p style="font-size:11pt; font-weight:bold;">Favourite Bus #<?php echo $user['f_BusID'];?></p>
-          		<p><?php echo $user['busno'];?></p>
+          		<p><strong>Bus No.</strong></p>
+				<p><?php echo $user['busno'];?></p>
         	</div>
       	</div>
 	  </section>
 	  <?php
-      }
+      	}
+	  }
 	  ?>
 </body>
 </html>

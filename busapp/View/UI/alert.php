@@ -12,45 +12,6 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-    nav{
-      background-color:rgba(177, 218, 143, 0.8);
-    }
-
-    .breadcrumb{
-      font-size: 13pt;
-    }
-
-    .mainpage{
-      margin-top:10%;
-    }
-
-    .myprofile{
-      margin-top:10%;
-    }
-
-    .profile_edit{
-      float: right;
-      margin-right:10%;
-	}
-	
-	.tabs{
-		color:#3F8755;
-	}
-	
-	.tabs .tab a{
-		color:rgba(123, 193, 68, 0.8);
-	}
-	
-	.tabs .tab a:hover, .tabs .tab a.active {
-		color:rgb(123, 193, 68);
-	}
-	.tabs .indicator{
-		background-color:rgb(123, 193, 68);
-	}
-
-    </style>
-
     <script>
     // side nav //
     (function($){

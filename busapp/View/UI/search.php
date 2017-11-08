@@ -27,6 +27,54 @@ session_start();
 	input[type=text]:focus {
 		border-bottom:2px solid red;
 	}
+	
+	table{
+		margin-top:10%;
+		height:100%;
+	}
+	
+	table > tbody > tr{
+		height:118px;
+	}
+	
+    table > tbody > tr:nth-child(even){
+      background-image:url(../image/bus_R1.png);
+	  background-repeat:no-repeat;
+	  background-size: auto;
+    }
+
+    table > tbody >tr:nth-child(odd){
+      background-image:url(../image/bus_L1.png);
+	  background-repeat:no-repeat;
+	  background-size: auto;
+    }
+
+    table > tbody > tr:first-child{
+      background-image:url(../image/start.png);
+	  background-repeat:no-repeat;
+	  background-size:auto;
+    }
+
+    table > tbody >tr:last-child{
+      background-image:url(../image/end.png);
+	  background-repeat:no-repeat;
+      background-size: auto;
+    }
+	
+	td{
+		text-indent:125px;
+	}
+	
+	.tabs .tab a{
+		color:rgba(123, 193, 68, 0.8);
+	}
+	
+	.tabs .tab a:hover, .tabs .tab a.active {
+		color:rgb(123, 193, 68);
+	}
+	.tabs .indicator{
+		background-color:rgb(123, 193, 68);
+	}
 
 	</style>
 
@@ -51,7 +99,7 @@ session_start();
 
   <body>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-      <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
+      <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40));">
         <ul id="slide-out" class="side-nav">
          <?php
                 require('../../Model/db.php');
@@ -88,34 +136,151 @@ session_start();
       	}
 	  ?>
       
-      <div class="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
-      	<div class="row">
-        	<div class="col s2"></div>
-            <div class="col s8">
-            	<h4 style="text-align:center; color:white; font-size:15pt;">SEARCH</h4>
-      		</div>
-      		<div class="col s2"></div>
-  		</div>
+      <div class="mainpage" id="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%; height:100%; padding-top:5%;">
         <div class="row">
-        	<div class="col s1"></div>
-            <div class="col s10" id="search_bar">
-            	<div class="search">
-            		<input type="text" name="search" placeholder="Search Bus Number.." style="display:inline-block; position:relative;">
-                	<input type="button" style="display:inline-block; position:absolute; margin-top:3%; padding-top:2%; padding-bottom:2%; background-color:white;" value="SEARCH">
+        	<form id="busSearch">
+                <div class="col s1"></div>
+                <div class="col s8">
+                    <div class="search">
+                        <input type="text" id="busNo" name="busNo" placeholder="Search Bus Number.." style="display:inline-block; position:relative; border-bottom:thin solid white; padding-left:15px;">
+                    </div>
                 </div>
-                <div style="width:100%; border-top:1px solid white; padding-bottom:8%;"></div>
-                <input type="text" name="search" placeholder="Search stop.." style="display:inline-block; position:relative;">
-                <input type="button" style="display:inline-block; position:absolute; margin-top:3%; padding-top:2%; padding-bottom:2%; background-color:white;" value="SEARCH">
-                <p style="text-align:center; color:white;">OR</p>
-                <select>
-                </select>
-      		</div>
-      		<div class="col s1"></div>
-  		</div>  
+                <div class="col s2">
+                    <input type="button" style="display:inline-block; position:absolute; margin-top:3%; padding-top:2%; padding-bottom:2%; background-color:rgb(123, 193, 68); color:white; border-radius:5px;" value="FIND" onClick="trackbus()">
+                </div>
+                <div class="col s1"></div>
+            </form>
+  		</div>
+        
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="col s10" id="result"></div>
+            <div class="col s1"></div>
+      	</div>
+        
+        <div class="row">
+        	<form>
+            	<div class="col s1"></div>
+                <div class="col s10">
+                    <input type="hidden" id="LATITUDE" name="LATITUDE" >
+                    <input type="hidden" id="LONGITUDE" name="LONGITUDE">
+                    <input class="waves-effect waves-light btn" type="button" value="MY LOCATION" onClick="getLocation(); myLocation()" style="background-color:rgb(123, 193, 68); width:100%;">
+                </div>
+                <div class="col s1"></div>
+            </form>
+        </div>
+        
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="col s10" id="result2"></div>
+            <div class="col s1"></div>
+      	</div>
       </div>
       
-      <script>
-	  </script>
+      <div class="row" style="margin-bottom:0px;" id="arrival_btn">
+        <div class="col s12" style="background-color:rgb(248, 151, 40);">
+            <a onClick="displayGraph(); displayRoute();" style="text-decoration:none; text-align:center; display:block; color:white; padding:3%; font-size:15pt;">PREDICT ARRIVAL TIME</a>
+        </div>
+      </div>
       
-</body>
+      <div id="graphpage" style="height:90vh; padding:10px; display:none;">
+      	<div id="graph" style="height:90%"></div>
+      	<div id="result3" style="height:10%; background:rgb(123, 193, 68); color:white;">
+        </div>
+      </div>
+            
+  </body>
 </html>
+
+<script>//
+//function arrivalbtn(){
+//	if ($('#result').is(':empty') | $('#result2').is(':empty')){
+//		$('#arrival_btn').hide();
+//	}else{
+//		$('#arrival_btn').show();
+//	}
+//}
+
+function displayGraph(){
+	 document.getElementById("mainpage").style.display = "none";
+	 document.getElementById("arrival_btn").style.display = "none";
+	 document.getElementById("graphpage").style.display = "block";
+}
+
+function trackbus(){
+	  $.ajax({
+	   url:'../../Controller/Get_Bus_GPS.php',
+	   data:{
+		   busNo:$("#busNo").val()
+	   },
+	   datatype:"json",
+	   type: 'GET',
+	   success: function (data) {
+		   $("#result").html(data);
+	   }
+	});
+}
+
+function myLocation(){
+	  $.ajax({
+	   url:'../../Controller/Get_MyLocation.php',
+	   data:{
+		   LATITUDE: $("#LATITUDE").val(),
+		   LONGITUDE:$("#LONGITUDE").val()
+	   },
+	   type: 'POST',
+	   success: function (data) {
+		   $("#result2").html(data);
+	   }
+	});
+}
+
+function (){
+	 var formValue = $("#result1, #result2").serialize();
+	$.ajax({
+	   url:'../../Controller/Calculate_arrival.php',
+	   data:{
+		   stop1:$("#stop1").val(),
+		   stop2:$("#stop2").val()
+	   },
+	   type: 'POST',
+	   success: function (data) {
+		   $("#result3").html(data);
+	   }
+	});
+}
+
+// GET Lat & Log value of current position
+var x = document.getElementById("mylocation");
+var y = document.getElementById("LATITUDE");
+var z = document.getElementById("LONGITUDE");
+
+function getLocation(){
+	if (navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(showPosition, showError);
+	}else{
+		x.innerHTML = "Geolocation is not supported by this browser.";
+	}
+}
+function showPosition(position){
+	y.value = position.coords.latitude;
+	z.value = position.coords.longitude;
+}
+
+function showError(error){
+	switch(error.code){
+		case error.PERMISSION_DENIED:
+		x.innerHTML = "User denied the request for Geolocation."
+		break;
+		case error.POSITION_UNAVAILABLE:
+		x.innerHTML = "Location information is unavailable."
+		break;
+		case error.TIMEOUT:
+		x.innerHTML = "The request to get user location timed out ."
+		break;
+		case error.UNKNOWN_ERROR:
+		x.innerHTML = "An unknown error occurred."
+		break;
+	}
+}
+</script>
