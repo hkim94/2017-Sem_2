@@ -182,18 +182,11 @@ session_start();
             <a onClick="displayGraph(); calculateTime(); getGraph();" style="text-decoration:none; text-align:center; display:block; color:white; padding:3%; font-size:15pt;">PREDICT ARRIVAL TIME</a>
         </div>
       </div>
-<<<<<<< HEAD
 
       <div id="graphpage" style="height:90vh; display:none;">
       	<div id="graph" style="height:90%"></div>
 
       	<div id="result3" style="height:10%; background:rgb(123, 193, 68); color:white; position:fixed; width:100%; padding:5%; bottom:0; padding-right:10%; text-align:right; font-size:15pt;">
-=======
-      
-      <div id="graphpage" style="height:90vh; padding:10px; display:none;">
-      	<div id="graph" style="height:90%"></div>
-      	<div id="result3" style="height:10%; background:rgb(123, 193, 68); color:white;">
->>>>>>> abf4e5091ffdb369ff77912717d8806ae28d2035
         </div>
       </div>
 
@@ -244,7 +237,6 @@ function myLocation(){
 	});
 }
 
-<<<<<<< HEAD
 function getGraph(){
 	var bus_form = $("#result").serialize();
 	  $.ajax({
@@ -265,15 +257,6 @@ function calculateTime(){
 	   data:{
 		   stopID1:$("#stopID1").val(),
 		   stopID2:$("#stopID2").val()
-=======
-function (){
-	 var formValue = $("#result1, #result2").serialize();
-	$.ajax({
-	   url:'../../Controller/Calculate_arrival.php',
-	   data:{
-		   stop1:$("#stop1").val(),
-		   stop2:$("#stop2").val()
->>>>>>> abf4e5091ffdb369ff77912717d8806ae28d2035
 	   },
 	   type: 'POST',
 	   success: function (data) {
