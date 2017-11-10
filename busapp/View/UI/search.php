@@ -11,7 +11,7 @@ session_start();
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+
     <style>
 	#search_bar > input[type=text] {
 		width: 80%;
@@ -27,16 +27,16 @@ session_start();
 	input[type=text]:focus {
 		border-bottom:2px solid red;
 	}
-	
+
 	table{
 		margin-top:10%;
 		height:100%;
 	}
-	
+
 	table > tbody > tr{
 		height:118px;
 	}
-	
+
     table > tbody > tr:nth-child(even){
       background-image:url(../image/bus_R1.png);
 	  background-repeat:no-repeat;
@@ -60,15 +60,15 @@ session_start();
 	  background-repeat:no-repeat;
       background-size: auto;
     }
-	
+
 	td{
 		text-indent:125px;
 	}
-	
+
 	.tabs .tab a{
 		color:rgba(123, 193, 68, 0.8);
 	}
-	
+
 	.tabs .tab a:hover, .tabs .tab a.active {
 		color:rgb(123, 193, 68);
 	}
@@ -103,7 +103,7 @@ session_start();
         <ul id="slide-out" class="side-nav">
          <?php
                 require('../../Model/db.php');
-                
+
                 if(isset($_SESSION['userID'])){
                     $userID = $_SESSION['userID'];
                     $result = $conn->prepare("SELECT * FROM `users` LEFT JOIN `gocard` ON `users`.`userID` = `gocard`.`userID` WHERE `users`.userID = :userID");
@@ -135,7 +135,7 @@ session_start();
       <?php
       	}
 	  ?>
-      
+
       <div class="mainpage" id="mainpage" style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%; height:100%; padding-top:5%;">
         <div class="row">
         	<form id="busSearch">
@@ -151,13 +151,13 @@ session_start();
                 <div class="col s1"></div>
             </form>
   		</div>
-        
+
         <div class="row">
             <div class="col s1"></div>
             <div class="col s10" id="result"></div>
             <div class="col s1"></div>
       	</div>
-        
+
         <div class="row">
         	<form>
             	<div class="col s1"></div>
@@ -169,25 +169,27 @@ session_start();
                 <div class="col s1"></div>
             </form>
         </div>
-        
+
         <div class="row">
             <div class="col s1"></div>
             <div class="col s10" id="result2"></div>
             <div class="col s1"></div>
       	</div>
       </div>
-      
+
       <div class="row" style="margin-bottom:0px;" id="arrival_btn">
         <div class="col s12" style="background-color:rgb(248, 151, 40);">
-            <a onClick="displayGraph(); displayRoute();" style="text-decoration:none; text-align:center; display:block; color:white; padding:3%; font-size:15pt;">PREDICT ARRIVAL TIME</a>
+            <a onClick="displayGraph(); calculateTime(); getGraph();" style="text-decoration:none; text-align:center; display:block; color:white; padding:3%; font-size:15pt;">PREDICT ARRIVAL TIME</a>
         </div>
       </div>
-      
-      <div id="graphpage" style="height:90vh; padding:10px; display:none;">
-      	<div id="result3">
+
+      <div id="graphpage" style="height:90vh; display:none;">
+      	<div id="graph" style="height:90%"></div>
+
+      	<div id="result3" style="height:10%; background:rgb(123, 193, 68); color:white; position:fixed; width:100%; padding:5%; bottom:0; padding-right:10%; text-align:right; font-size:15pt;">
         </div>
       </div>
-            
+
   </body>
 </html>
 
@@ -205,6 +207,7 @@ function displayGraph(){
 	 document.getElementById("arrival_btn").style.display = "none";
 	 document.getElementById("graphpage").style.display = "block";
 }
+
 
 function trackbus(){
 	  $.ajax({
@@ -234,11 +237,27 @@ function myLocation(){
 	});
 }
 
-function displayRoute(){
-	 var formValue = $("#result1, #result2").serialize();
+function getGraph(){
+	var bus_form = $("#result").serialize();
+	  $.ajax({
+	   url:'../../Controller/track_Select.php',
+	   data:{
+			 busNo:$("#busNo").val()
+	   },
+	   type: 'POST',
+	   success: function (data) {
+		   $("#graph").html(data);
+	   }
+	});
+}
+
+function calculateTime(){
 	$.ajax({
-	   url:'../../Controller/Get_MyLocation.php',
-	   data:formValue,
+	   url:'../../Controller/Calculate_arrival.php',
+	   data:{
+		   stopID1:$("#stopID1").val(),
+		   stopID2:$("#stopID2").val()
+	   },
 	   type: 'POST',
 	   success: function (data) {
 		   $("#result3").html(data);

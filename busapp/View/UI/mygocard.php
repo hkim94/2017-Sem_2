@@ -13,7 +13,7 @@ session_start();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script>
-	
+
     // side nav //
     (function($){
       $(function(){
@@ -27,7 +27,7 @@ session_start();
     $('.button-collapse').sideNav('hide');
     // Destroy sideNav
     $('.button-collapse').sideNav('destroy');
-	
+
 	//Modal trigger and content//
     function activateModal() {
     // initialise modal element
@@ -39,11 +39,11 @@ session_start();
 	// show modal
     mui.overlay('on', modalEl);
     }
-    
+
 	$(document).ready(function() {
       $('.modal').modal();
     });
-	
+
 	//select input
 	$(document).ready(function() {
 		$('select').material_select();
@@ -58,7 +58,7 @@ session_start();
         <ul id="slide-out" class="side-nav">
          <?php
                 require('../../Model/db.php');
-                
+
                 if(isset($_SESSION['userID'])){
                     $userID = $_SESSION['userID'];
                     $result = $conn->prepare("SELECT * FROM `users` LEFT JOIN `gocard` ON `users`.`userID` = `gocard`.`userID` WHERE `users`.userID = :userID");
@@ -102,7 +102,7 @@ session_start();
   	    <img src="../image/card_green.svg" alt="" style="width:100%;">
       </div>
       <div class="col s2"></div>
-  </div> 
+  </div>
 </div>
 
 <div class="row">
@@ -141,11 +141,11 @@ session_start();
 
 <div class="row" style="background-color:#E5E5E5; padding:6%; margin:0px;" id="applybtn">
 	<div class="col s1"></div>
-    
+
     <div class="col s10 center-align">
     <!-- Modal Trigger -->
       <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal1">Register Concession</a>
-    
+
       <form action="../../Controller/pdoCon.php" method="post">
           <div id="modal1" class="modal modal-fixed-footer">
             <div class="modal-content">
@@ -183,7 +183,7 @@ session_start();
                                 <option value="senior">Senior</option>
                                 <option value="adult">Adult</option>
                                 <option value="child">Child</option>
-                            </select> 
+                            </select>
                             <label>Concession Type</label>
                         </div>
                         <div class="input-field col s12">
@@ -193,7 +193,7 @@ session_start();
                         <div class="input-field col s12">
                             <input name="DOB" type="date" class="validate" title="Date of Birth" required>
                             <label for="DOB" data-error="wrong" data-success="right"></label>
-                        </div>         
+                        </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -203,13 +203,13 @@ session_start();
 	</div>
     <div class="col s1"></div>
 	</div>
-</div>   
+</div>
 <div class="row" style="background-color:#E5E5E5; padding:6%; margin:0px;" id="viewbtn">
 	<div class="col s1"></div>
 	<div class="col s10 center-align">
     <!-- Modal Trigger -->
-    <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal2">View Applied Concession</a>
-    
+    <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal2">View Concession</a>
+
       <!-- Modal Structure -->
           <div id="modal2" class="modal modal-fixed-footer">
             <div class="modal-content">
@@ -231,7 +231,7 @@ session_start();
                 <div style="margin-top:5%; border:1px solid #CCC; padding:5px;">
                 	<p style="font-weight:100; margin:0px;">CONCESSION TYPE</p>
                 	<p style="margin:0px; color:rgb(123, 193, 68);"><?php echo $row['conType'];?></p>
-                </div>    
+                </div>
                 <div style="margin-top:5%; border:1px solid #CCC; padding:5px;">
                 	<p style="font-weight:100; margin:0px;">ORGANISATION</p>
                 	<p style="margin:0px; color:rgb(123, 193, 68);"><?php echo $row['organisation'];?></p>
@@ -251,7 +251,7 @@ session_start();
 	</div>
     <div class="col s1"></div>
     </div>
-    
+
     <script  type="text/javascript">
 		function concess(){
 			var conID ='<?php echo $row['conID'];?>';
@@ -264,6 +264,6 @@ session_start();
 			}
 		};
 	</script>
-    
+
   </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 $dbusername = "root";
-$dbpassword = "root";
+$dbpassword = "";
 try{
 	$conn = new PDO("mysql:host=localhost;dbname=bus",  $dbusername, $dbpassword);
 	$conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

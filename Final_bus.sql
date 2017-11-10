@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2017 at 07:29 AM
+-- Generation Time: Nov 10, 2017 at 10:15 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -62,7 +62,8 @@ INSERT INTO `favourite_bus` (`f_BusID`, `busno`, `userID`) VALUES
 (2, '130', 37),
 (3, '155', 37),
 (4, '180', 37),
-(11, '111', 37);
+(11, '111', 37),
+(12, '222', 38);
 
 -- --------------------------------------------------------
 
@@ -105,6 +106,7 @@ CREATE TABLE `gocard` (
 --
 
 INSERT INTO `gocard` (`gocardno`, `userID`, `balance`, `conID`, `conType`, `organisation`, `DOB`) VALUES
+('4321422341212214', 38, NULL, NULL, NULL, NULL, NULL),
 ('4567893425678904', 37, '22.50', '34563421568904356', 'senior', 'Centrelink', '1988-12-03'),
 ('9432145678234678', 29, '23.50', '', '', '', '0000-00-00');
 
@@ -127,7 +129,7 @@ CREATE TABLE `location_bus` (
 
 INSERT INTO `location_bus` (`current_ID`, `busNo`, `LATITUDE`, `LONGITUDE`) VALUES
 (2, '555', '-27.469404', '153.023745'),
-(3, '222', '-27.463306', '153.028396');
+(3, '222', '-27.469016', '153.024221');
 
 -- --------------------------------------------------------
 
@@ -146,6 +148,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`username`, `password`, `userID`) VALUES
+('harry123', 'gvCFtRjGEGP0EpMdcOWSDGK0ewn1zqn0Ci4D6GwxO5rzNLXRl4yAwWu+nQ+vYCLSTShPfW4nqrXH5UDyqJn0Qw==', 38),
 ('jerry', 'NieQminDE4Ggcewn98nKl3Jhgq7Smn3dLlQ1MyLPswq7njpt8qwsIP4jQ2MR1nhWTQyNMFkwV19g4tPQSBhNeQ==', 29),
 ('tommy', 'NieQminDE4Ggcewn98nKl3Jhgq7Smn3dLlQ1MyLPswq7njpt8qwsIP4jQ2MR1nhWTQyNMFkwV19g4tPQSBhNeQ==', 37);
 
@@ -166,8 +169,8 @@ CREATE TABLE `route` (
 --
 
 INSERT INTO `route` (`routeNo`, `startPoint`, `endPoint`) VALUES
-(0, 2, 11),
-(1, 2, 20);
+(0, 2, 395),
+(1, 2, 395);
 
 -- --------------------------------------------------------
 
@@ -179,7 +182,7 @@ CREATE TABLE `schedule` (
   `TID` int(100) NOT NULL,
   `stopID` int(10) DEFAULT NULL,
   `routeNo` int(200) DEFAULT NULL,
-  `duration` varchar(5) NOT NULL
+  `duration` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -187,24 +190,26 @@ CREATE TABLE `schedule` (
 --
 
 INSERT INTO `schedule` (`TID`, `stopID`, `routeNo`, `duration`) VALUES
-(2, 2, 1, '5'),
-(3, 3, 1, '3'),
-(4, 4, 1, '4'),
-(5, 5, 1, '8'),
-(6, 6, 1, '15'),
-(7, 7, 1, '3'),
-(8, 8, 1, '6'),
-(9, 9, 1, '4'),
-(10, 10, 1, '5'),
-(11, 11, 1, '7'),
-(12, 12, 1, '3'),
-(13, 13, 1, '5'),
-(14, 14, 1, '9'),
-(15, 16, 1, '8'),
-(16, 17, 1, '7'),
-(17, 18, 1, '3'),
-(18, 19, 1, '2'),
-(19, 20, 1, '4');
+(2, 2, 1, 5),
+(3, 3, 1, 3),
+(4, 4, 1, 4),
+(5, 5, 1, 8),
+(6, 6, 1, 15),
+(7, 7, 1, 3),
+(8, 8, 1, 6),
+(9, 9, 1, 4),
+(10, 10, 1, 5),
+(11, 11, 1, 7),
+(12, 12, 1, 3),
+(13, 13, 1, 5),
+(14, 14, 1, 9),
+(15, 16, 1, 8),
+(16, 17, 1, 7),
+(17, 18, 1, 3),
+(18, 19, 1, 2),
+(19, 20, 1, 4),
+(20, 324, 1, 5),
+(21, 395, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -549,7 +554,7 @@ INSERT INTO `stop` (`stopID`, `routeNo`, `STREET_NAME`, `SUBURB`, `DESCRIPTION`,
 (321, 0, 'Boundary St', 'SPRING HILL', 'Boundary Street - 3', '-27.460300', '153.021201'),
 (322, 0, 'BOUNDARY ST', 'SPRING HILL', 'Fortescue Street - 2', '-27.460600', '153.023211'),
 (323, 0, 'WICKHAM ST', 'FORTITUDE VALLEY', 'Bus Control Centre', '-27.460821', '153.031660'),
-(324, 0, 'Baupaume Rd', 'HOLLAND PARK WEST', 'Holland Park High - 62', '-27.530736', '153.059468'),
+(324, 1, 'Baupaume Rd', 'HOLLAND PARK WEST', 'Holland Park High - 62', '-27.530736', '153.059468'),
 (325, 0, 'WICKHAM ST', 'FORTITUDE VALLEY', 'GOTHA / WICKHAM', '-27.459605', '153.031438'),
 (326, 0, 'Nursery Rd', 'HOLLAND PARK WEST', 'Flynn Street - 65', '-27.532589', '153.066374'),
 (327, 0, 'BAPAUME RD', 'HOLLAND PARK WEST', 'Dobbs Street - 63', '-27.534052', '153.061904'),
@@ -620,7 +625,7 @@ INSERT INTO `stop` (`stopID`, `routeNo`, `STREET_NAME`, `SUBURB`, `DESCRIPTION`,
 (392, 0, 'MUIR ST', 'CANNON HILL', 'Muir Street - 61', '-27.470357', '153.088231'),
 (393, 0, 'Whitworth Rd', 'CANNON HILL', 'Whitworth Street - 57', '-27.463361', '153.085725'),
 (394, 0, ' ', 'FORTITUDE VALLEY', 'Ann Street - 4', '-27.459445', '153.034037'),
-(395, 0, 'Kangaroo Gully Rd', 'BELLBOWRIE', 'Bellbowrie Chase\"\"\"\" Kangaroo Gully Road', '-27.564611', '152.875661'),
+(395, 1, 'Kangaroo Gully Rd', 'BELLBOWRIE', 'Bellbowrie Chase\"\"\"\" Kangaroo Gully Road', '-27.564611', '152.875661'),
 (396, 0, 'Kangaroo Gully Rd', 'BELLBOWRIE', 'Bellbowrie Chase\"\"\"\" Kangaroo gully Road', '-27.563505', '152.876021'),
 (397, 0, 'Muir St', 'CANNON HILL', 'Muir Street - 61', '-27.470099', '153.088403'),
 (398, 0, 'McPherson Rd', 'SINNAMON PARK', 'McPherson Malia - 55', '-27.551285', '152.948205'),
@@ -14907,7 +14912,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userID`, `fname`, `lname`, `mobile`, `email`) VALUES
 (29, 'Jerry', 'Lee', '0401157894', 'jerry@g.com'),
-(37, 'Tom', 'Luisy', '0432567890', 'tom@gm.com');
+(37, 'Tom', 'Brown', '0432567890', 'tom@gm.com'),
+(38, 'Harry', 'lee', '0401212456', 'harry@test.com');
 
 --
 -- Indexes for dumped tables
@@ -14927,13 +14933,9 @@ ALTER TABLE `bus`
 --
 ALTER TABLE `favourite_bus`
   ADD PRIMARY KEY (`f_BusID`),
-  ADD UNIQUE KEY `busno_3` (`busno`),
   ADD KEY `busID` (`busno`),
   ADD KEY `userID` (`userID`),
-  ADD KEY `userID_2` (`userID`),
-  ADD KEY `busID_2` (`busno`),
-  ADD KEY `busno` (`busno`),
-  ADD KEY `busno_2` (`busno`);
+  ADD KEY `busno` (`busno`);
 
 --
 -- Indexes for table `favourite_stop`
@@ -15010,7 +15012,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `favourite_bus`
 --
 ALTER TABLE `favourite_bus`
-  MODIFY `f_BusID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `f_BusID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `favourite_stop`
 --
@@ -15025,7 +15027,7 @@ ALTER TABLE `location_bus`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `TID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `TID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `stop`
 --
@@ -15040,7 +15042,7 @@ ALTER TABLE `stop2`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- Constraints for dumped tables
 --

@@ -17,7 +17,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div style="border:2px groove white; padding:10px;">
 		<p style="color:white; margin:0px; padding:0px;">MY CURRENT LOCATION</p>
 		<div style="padding:3%;">
-        <input type="hidden" name="stopID" value="<?php echo $val['stopID'];?>">
+        <input type="hidden" name="stopID2" value="<?php echo $val['stopID'];?>" id="stopID2">
         <label style="color:black;">Street</label>
         <input type="text" value="<?php echo $val['STREET_NAME'];?>" style="color:#E3E1E1;" disabled>
         <label style="color:black;">Suburb:</label>
