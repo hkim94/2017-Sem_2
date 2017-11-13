@@ -9,7 +9,7 @@ $query = $conn->prepare("INSERT INTO favourite_stop (stopID, userID) VALUES (:st
 $query->bindParam(':stopID', $stopID);
 $query->bindParam(':userID', $userID);
 $query->execute();
-$URL="http://localhost/busapp/View/UI/mystop.php";
+$URL="../View/UI/mystop.php";
 		echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 		echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 ?>

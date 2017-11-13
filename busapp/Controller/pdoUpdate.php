@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 		$query->bindParam(':userID', $userID);
 		$query->execute();
 		
-		$URL="http://localhost/busapp/View/UI/myprofile.php";
+		$URL="../View/UI/myprofile.php";
 		echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 		echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 		}

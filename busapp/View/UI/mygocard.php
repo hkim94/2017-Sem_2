@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['userID'])){
+	header("location:../../index.php");
+	exit();
+}
 ?>
 <!doctype html>
 <html>
@@ -146,7 +151,7 @@ session_start();
     <!-- Modal Trigger -->
       <a class="waves-effect waves-light btn modal-trigger" style="background-color:rgb(248, 151, 40);" href="#modal1">Register Concession</a>
 
-      <form action="../../Controller/pdoCon.php" method="post">
+      <form action="../../Controller/pdoCon.php" method="post" enctype="multipart/form-data">
           <div id="modal1" class="modal modal-fixed-footer">
             <div class="modal-content">
             	<div style="width:100%; border-bottom:thin solid #CCC; margin-bottom:5%;">
@@ -193,6 +198,9 @@ session_start();
                         <div class="input-field col s12">
                             <input name="DOB" type="date" class="validate" title="Date of Birth" required>
                             <label for="DOB" data-error="wrong" data-success="right"></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input name="file_con" id="file_con" type="file">
                         </div>
             </div>
           </div>

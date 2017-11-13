@@ -6,7 +6,7 @@ require_once("../Model/pdoFunction.php");
 $LATITUDE = !empty($_POST['LATITUDE'])? test_user_input(($_POST['LATITUDE'])):null;
 $LONGITUDE = !empty($_POST['LONGITUDE'])? test_user_input(($_POST['LONGITUDE'])):null;
 
-$sql = "SELECT * FROM `stop` WHERE LATITUDE - $LATITUDE <= 0.00001 AND LONGITUDE - $LONGITUDE <= 0.00001";
+$sql = "SELECT * FROM `stop` WHERE LATITUDE - $LATITUDE <= 0.000001 AND LONGITUDE - $LONGITUDE <= 0.000001";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

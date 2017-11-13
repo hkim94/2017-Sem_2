@@ -4,9 +4,7 @@ require_once("../Model/db.php");
 require_once("../Model/pdoFunction.php");
 ?>
 
-
 <?php
-
 if(isset($_POST['login'])){
 	$username = !empty($_POST['username'])? test_user_input(($_POST['username'])):null;
 	$password = !empty($_POST['password'])? test_user_input(($_POST['password'])):null;
@@ -27,7 +25,7 @@ if(isset($_POST['login'])){
 		echo '<meta http-equiv="refresh" content="3; URL=../index.php">';
 	
 	}else{
-		$URL="../View/UI/myprofile.php";
+		$URL="../View/UI/manageuser.php";
 		echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 		echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 		exit;
