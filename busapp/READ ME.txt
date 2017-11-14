@@ -34,8 +34,12 @@ By clicking 'Add' the stop will be added in your list.
 * search.php
 If you are loged in, this page will let you search current location of a bus.
 
+<<<<<<< HEAD
 1. Search a bus number,'222'
    it will get latitude and longitude of the bus from the database
+=======
+1. Search a bus number, it will get latitude and longitude of the bus from the database
+>>>>>>> 4849ff1d7660638a7b88c1657fa9dc3d8b6a34bd
    (assume Translink update it every time)
    With the values, system will the closest bus stop from the current location.
    Detail of the bus stop will be shown on the screen.
