@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 10, 2017 at 10:15 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Host: localhost:3306
+-- Generation Time: Nov 14, 2017 at 09:13 AM
+-- Server version: 5.6.35
+-- PHP Version: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -106,6 +104,7 @@ CREATE TABLE `gocard` (
 --
 
 INSERT INTO `gocard` (`gocardno`, `userID`, `balance`, `conID`, `conType`, `organisation`, `DOB`) VALUES
+('0000000000000000', 39, NULL, NULL, NULL, NULL, NULL),
 ('4321422341212214', 38, NULL, NULL, NULL, NULL, NULL),
 ('4567893425678904', 37, '22.50', '34563421568904356', 'senior', 'Centrelink', '1988-12-03'),
 ('9432145678234678', 29, '23.50', '', '', '', '0000-00-00');
@@ -148,8 +147,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`username`, `password`, `userID`) VALUES
+('admin', 'gvCFtRjGEGP0EpMdcOWSDGK0ewn1zqn0Ci4D6GwxO5rzNLXRl4yAwWu+nQ+vYCLSTShPfW4nqrXH5UDyqJn0Qw==', 39),
 ('harry123', 'gvCFtRjGEGP0EpMdcOWSDGK0ewn1zqn0Ci4D6GwxO5rzNLXRl4yAwWu+nQ+vYCLSTShPfW4nqrXH5UDyqJn0Qw==', 38),
-('jerry', 'NieQminDE4Ggcewn98nKl3Jhgq7Smn3dLlQ1MyLPswq7njpt8qwsIP4jQ2MR1nhWTQyNMFkwV19g4tPQSBhNeQ==', 29),
 ('tommy', 'NieQminDE4Ggcewn98nKl3Jhgq7Smn3dLlQ1MyLPswq7njpt8qwsIP4jQ2MR1nhWTQyNMFkwV19g4tPQSBhNeQ==', 37);
 
 -- --------------------------------------------------------
@@ -14913,7 +14912,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`userID`, `fname`, `lname`, `mobile`, `email`) VALUES
 (29, 'Jerry', 'Lee', '0401157894', 'jerry@g.com'),
 (37, 'Tom', 'Brown', '0432567890', 'tom@gm.com'),
-(38, 'Harry', 'lee', '0401212456', 'harry@test.com');
+(38, 'Harry', 'lee', '0401212456', 'harry@test.com'),
+(39, 'admin', 'admin', '0400000000', 'admin@go.com');
 
 --
 -- Indexes for dumped tables
@@ -15042,7 +15042,7 @@ ALTER TABLE `stop2`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- Constraints for dumped tables
 --
@@ -15070,7 +15070,7 @@ ALTER TABLE `favourite_stop`
 -- Constraints for table `gocard`
 --
 ALTER TABLE `gocard`
-  ADD CONSTRAINT `gocard_ibfk_4` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
+  ADD CONSTRAINT `gocard_ibfk_4` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `location_bus`
@@ -15103,7 +15103,6 @@ ALTER TABLE `schedule`
 --
 ALTER TABLE `stop`
   ADD CONSTRAINT `stop_ibfk_1` FOREIGN KEY (`routeNo`) REFERENCES `route` (`routeNo`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

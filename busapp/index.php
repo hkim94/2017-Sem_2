@@ -64,6 +64,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- Modal Trigger -->
+    <a href="View/UI/admin.php" style="text-decoration:none; color:white; display:block; text-align:right; padding-right:10px; padding-top:10px;">Admin</a>
     <div class="row" style="margin-top:100%;"></div>
     <div class="row" style="margin-top:5%;">
     	<div class="col s12">
@@ -78,7 +79,7 @@
     	<div class="col s12">
     		<div class="col s1"></div>
     			<div class="col s10 center-align">
-	                <a class="waves-effect waves-light btn-large modal-trigger" style="background-color:white; color:rgb(122, 193, 67);" href="#modal2"><i class="material-icons right">lock</i>Login</a>
+	                <a id="Login" class="waves-effect waves-light btn-large modal-trigger" style="background-color:white; color:rgb(122, 193, 67);" href="#modal2"><i class="material-icons right">lock</i>Login</a>
             	</div>
     		<div class="col s1"></div>
   		</div>
@@ -162,7 +163,7 @@
             	</div>
             </div>
             <div class="modal-footer">
-            	<button type="submit" name="btnLogin" class="modal-action modal-close waves-effect waves-green btn-flat">Login</button>
+            	<button type="submit" id="btnLogin" name="btnLogin" class="modal-action modal-close waves-effect waves-green btn-flat">Login</button>
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancle</a>
             </div>
 		</div>
@@ -221,4 +222,24 @@ function validateLogin(){
         return false;
     }
 }
+
+$('#btnLogin').on('click', function(){
+
+    $('input[type="text"]').each(function(){    
+        var id = $(this).attr('id');
+        var value = $(this).val();
+       localStorage.setItem(id, value);
+
+    });   
+});
+
+$('#Login').on('click', function(){
+    $('input[type="text"]').each(function(){    
+        var id = $(this).attr('id');
+        var value = localStorage.getItem(id);
+
+        $(this).val(value);
+
+    }); 
+});
 </script>

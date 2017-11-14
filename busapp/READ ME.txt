@@ -1,0 +1,50 @@
+Username: tommy
+Password: 12345
+
+admin username: admin
+Password: H@nnah1215
+
+* index.php
+You are able to register or login
+
+* admin.php
+You are able to see all users and manage them.
+
+* myprofile.php
+If you are loged in, this page will show your personal detail.
+You are allowed to update your detail except gocard number.
+
+*mygocard.php
+If you are loged in, this page will show your gocard detail.
+If you applied concession already, 'View Concession' button will be shown in your screen to represent detail of 
+concession. But if you have't applied concession, 'Register concession' button will be displayed to let you to
+apply concession.
+
+* mybuslist.php
+If you are loged in, this page will show your favourite bus list.
+When you are add to your favourite list, the system will display list of buses.
+You are only needed to click the heart button to add.
+
+* mystop.php
+If you are loged in, this page will show your favourite stop list.
+When you click '+' button to add, the system will use GPS function to search list of stops around you.
+By clicking 'Add' the stop will be added in your list.
+
+
+* search.php
+If you are loged in, this page will let you search current location of a bus.
+
+1. Search a bus number,'222'
+   it will get latitude and longitude of the bus from the database
+   (assume Translink update it every time)
+   With the values, system will the closest bus stop from the current location.
+   Detail of the bus stop will be shown on the screen.
+
+2. Click 'Search my location', it will get latitude and longitude of your current location and post the value
+   to .php file and select the closest bus stop from your current location.
+   Detail of the bus stop will be shown on the screen.
+
+3. Click 'Calculate Arrival time', the system will post stopID of the bus stops and sum duration time between
+   the 2 bus stops.
+   And the system will post the bus number to get route detail from the database.
+   The route detail will display all bus stops with detail.
