@@ -14,7 +14,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php
 	foreach ($data as $val){
 ?>
-<form action="./F_stop_Insert.php" method="post">
+<form action="../../Controller/F_stop_Insert.php" method="post">
 	<div style="width:100%; background-color:rgb(248, 151, 40); border-bottom:4px solid white;">
 		<div style="padding:3%;">
         <input type="hidden" name="userID" value="<?php echo $_SESSION['userID'];?>">

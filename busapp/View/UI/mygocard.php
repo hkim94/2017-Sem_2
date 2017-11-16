@@ -92,6 +92,8 @@ if (!isset($_SESSION['userID'])){
           <li><a href="mybuslist.php"><i class="material-icons">directions_bus</i>My Favourite Bus</a></li>
           <li><a href="mystop.php"><i class="material-icons">nature_people</i>My Bus Stop</a></li>
           <li><a href="mygocard.php"><i class="material-icons">credit_card</i>Go Card</a></li>
+          <li><a class="subheader"></a></li>
+          <li><a href="contact.php"><i class="material-icons">bug_report</i>Report Bug</a></li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="small material-icons" style="color:white; margin:10px;">menu</i></a>
       </div>
@@ -199,10 +201,7 @@ if (!isset($_SESSION['userID'])){
                             <input name="DOB" type="date" class="validate" title="Date of Birth" required>
                             <label for="DOB" data-error="wrong" data-success="right"></label>
                         </div>
-                        <div class="input-field col s12">
-                            <input name="file_con" id="file_con" type="file">
-                        </div>
-            </div>
+                </div>
           </div>
           <div class="modal-footer">
 	            <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" name="btnCon" value="Submit">

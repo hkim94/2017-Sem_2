@@ -63,8 +63,34 @@
     <body style="background-image:url(View/image/index_bg2_animated.svg); background-size:cover; background-repeat:no-repeat;">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <!-- Modal Trigger -->
-    <a href="View/UI/admin.php" style="text-decoration:none; color:white; display:block; text-align:right; padding-right:10px; padding-top:10px;">Admin</a>
+    <div class="row"> 
+    <a class="modal-trigger" style="background-color:white; color:rgb(122, 193, 67); float:left; padding:10px;" href="#modal3">Admin</a>
+    </div>
+    <!-- Login Form -->
+    <form action="Controller/login_admin.php" method="post" class="col s12" name="loginForm" onSubmit="return validateLogin()">
+	    <div id="modal3" class="modal modal-fixed-footer">
+    		<div class="modal-content">
+        	    <div class="row">    
+                    <div class="row">
+                        <div class="input-field col s12"> <i class="material-icons prefix">account_circle</i>
+                            <input id="usernameA" name="username" type="text" class="validate">
+                            <label for="usernameA">Username</label>
+                        </div>
+                        <div class="input-field col s12"> <i class="material-icons prefix">lock</i>
+                            <input id="passwordA" name="password" type="password" class="validate">
+                            <label for="passwordA">Password</label>
+                        </div>
+                        	<input type="hidden" name="login">
+                    </div>
+            	</div>
+            </div>
+            <div class="modal-footer">
+            	<button type="submit" id="adminLogin" name="adminLogin" class="modal-action modal-close waves-effect waves-green btn-flat">Login</button>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancle</a>
+            </div>
+		</div>
+	</form>
+    
     <div class="row" style="margin-top:100%;"></div>
     <div class="row" style="margin-top:5%;">
     	<div class="col s12">
@@ -168,6 +194,7 @@
             </div>
 		</div>
 	</form>
+    
 </body>
 </html>
 
@@ -233,13 +260,4 @@ $('#btnLogin').on('click', function(){
     });   
 });
 
-$('#Login').on('click', function(){
-    $('input[type="text"]').each(function(){    
-        var id = $(this).attr('id');
-        var value = localStorage.getItem(id);
-
-        $(this).val(value);
-
-    }); 
-});
 </script>

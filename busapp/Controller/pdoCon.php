@@ -11,15 +11,6 @@ $conType = !empty($_POST['conType'])? test_user_input(($_POST['conType'])):null;
 $organisation = !empty($_POST['organisation'])? test_user_input(($_POST['organisation'])):null;
 $DOB = !empty($_POST['DOB'])? test_user_input(($_POST['DOB'])):null;
 
-$uploaddir = "uploads/";
-$uploadfile = $uploaddir . basename($_FILES["file_con"]["name"]);
-
-if (move_uploaded_file($_FILES['file_con']['tmp_name'], $uploadfile)) {
-    echo "File is valid, and was successfully uploaded.\n";
-} else {
-    echo "Possible file upload attack!\n";
-}
-
 try{
 	  $query = "update bus.gocard set `conID`= '$conID',`conType`='$conType',`organisation`='$organisation',`DOB`='$DOB' where `gocardno`= '$gocardno'";
 

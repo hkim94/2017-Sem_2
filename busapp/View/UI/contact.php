@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['userID'])){
+	header("location:../../index.php");
+	exit();
+}
 ?>
 <!doctype html>
 <html>
@@ -13,6 +18,7 @@ session_start();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script>
+
     // side nav //
     (function($){
       $(function(){
@@ -21,23 +27,43 @@ session_start();
     })(jQuery);
 
     $(".button-collapse").sideNav();
-
     $('.button-collapse').sideNav('show');
     // Hide sideNav
     $('.button-collapse').sideNav('hide');
     // Destroy sideNav
     $('.button-collapse').sideNav('destroy');
 
+	//Modal trigger and content//
+    function activateModal() {
+    // initialise modal element
+    var modalEl = document.createElement('div');
+    modalEl.style.width = '80%';
+    modalEl.style.height = 'auto';
+    modalEl.style.margin = '5%; auto';
+    modalEl.style.backgroundColor = '#fff';
+	// show modal
+    mui.overlay('on', modalEl);
+    }
+
+	$(document).ready(function() {
+      $('.modal').modal();
+    });
+
+	//select input
+	$(document).ready(function() {
+		$('select').material_select();
+	});
     </script>
+
   </head>
 
   <body>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-      <div style="background-color:rgb(123, 193, 68);">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <div style="background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40)); padding-bottom:5%;">
         <ul id="slide-out" class="side-nav">
          <?php
                 require('../../Model/db.php');
-                
+
                 if(isset($_SESSION['userID'])){
                     $userID = $_SESSION['userID'];
                     $result = $conn->prepare("SELECT * FROM `users` LEFT JOIN `gocard` ON `users`.`userID` = `gocard`.`userID` WHERE `users`.userID = :userID");
@@ -49,14 +75,16 @@ session_start();
               <div class="background">
                 <img src="../image/bg3.jpg">
               </div>
-              <img class="circle" src="../image/user_icon.svg"></a>
+              <div>
+              	<img class="circle" src="../image/user_icon.svg" style="display:inline-block";>
+                <a href="../../Controller/pdoLogout.php" style="display:inline-block; float:right; text-decoration:none; color:black;"><i class="material-icons">exit_to_app</i></a>
+              </div>
               <span class="white-text name"><?php echo $row['fname']; echo "\n\n"; echo $row['lname'];?></span>
               <span class="white-text email"><?php echo $row['email'];?></span>
             </div>
           </li>
           <li><a class="subheader">Bus</a></li>
           <li><a href="search.php"><i class="material-icons">search</i>Search</a></li>
-          <li><a href="alert.php"><i class="material-icons">error_outline</i>Alert</a></li>
 
           <li><div class="divider"></div></li>
           <li><a class="subheader">My Page</a></li>
@@ -64,56 +92,29 @@ session_start();
           <li><a href="mybuslist.php"><i class="material-icons">directions_bus</i>My Favourite Bus</a></li>
           <li><a href="mystop.php"><i class="material-icons">nature_people</i>My Bus Stop</a></li>
           <li><a href="mygocard.php"><i class="material-icons">credit_card</i>Go Card</a></li>
+          
+          <li><a class="subheader"></a></li>
+          <li><a href="contact.php"><i class="material-icons">bug_report</i>Report Bug</a></li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="small material-icons" style="color:white; margin:10px;">menu</i></a>
+        
+        <p style="color:white; font-size:13pt;  text-align:center; background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40));">Report Bug</p>
       </div>
 
+  <?php
+  	}
+  ?>
+  <div class="col s12" style="margin:5%;">
+      <form enctype="multipart/form-data" action="../../Controller/upload_file.php" method="post">
+      <p style="text-align:center; color:rgb(123,193,68); padding-bottom:5%;">
+        You can help improve Go Transit App by reporting issues in the page.</br>
+        Please take screen shot and upload it to us.
+      </p>
+        <input type="file" name="uploaded_file" id="uploaded_file"></br>
+        <input type="submit" value="Upload" style="background-color:rgb(248, 151, 40); color:white; padding:5px; border:none; float:right;">
+      </form>
+  </div>
 
-      <!-- breadcrumb -->
-      <nav>
-        <div class="nav-wrapper">
-            <div class="col s12" style="margin-left:10%;">
-              <a href="#!" class="breadcrumb" style="color:#3F8755;">My Page</a>
-              <a href="#!" class="breadcrumb" style="color:#3F8755;">Alert</a>
-            </div>
-        </div>
-      </nav>
-      <?php
-      	}
-	  ?>
-
-     <!-- icon & Bg -->
-     <div class="row">
-     <div class="col s9">
-     </div>
-     <div class="col s3">
-     </div>
-     </div>
-
-     <!-- btns ADD & EDIT -->
-     <div class="row">
-        <div class="col 12">
-        </div>
-     </div>
-     
-     <!-- Favourite Bus / Stop register -->
-     <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
-            <li class="tab col s3"><a href="#buslist">My Bus</a></li>
-            <li class="tab col s3"><a href="#stoplist">My Bus Stop</a></li>
-            <li class="tab col s3"><a class="active" href="#alert">Alert</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s1"></div>
-        <div id="buslist" class="col s10">Test 1</div>
-        <div id="stoplist" class="col s10">Test 2</div>
-        <div id="alert" class="col s10">Test 3</div>
-        <div class="col s1"></div>
-      </div>
- 	</div>
-
-</body>
+  </body>
 </html>
+

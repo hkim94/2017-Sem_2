@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 14, 2017 at 09:13 AM
+-- Generation Time: Nov 16, 2017 at 04:02 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -105,7 +105,8 @@ CREATE TABLE `gocard` (
 
 INSERT INTO `gocard` (`gocardno`, `userID`, `balance`, `conID`, `conType`, `organisation`, `DOB`) VALUES
 ('0000000000000000', 39, NULL, NULL, NULL, NULL, NULL),
-('4321422341212214', 38, NULL, NULL, NULL, NULL, NULL),
+('1234546334523322', 40, NULL, NULL, NULL, NULL, NULL),
+('4321422341212214', 38, NULL, '23123132131321311', 'senior', 'dadasda', '2017-11-02'),
 ('4567893425678904', 37, '22.50', '34563421568904356', 'senior', 'Centrelink', '1988-12-03'),
 ('9432145678234678', 29, '23.50', '', '', '', '0000-00-00');
 
@@ -14913,7 +14914,8 @@ INSERT INTO `users` (`userID`, `fname`, `lname`, `mobile`, `email`) VALUES
 (29, 'Jerry', 'Lee', '0401157894', 'jerry@g.com'),
 (37, 'Tom', 'Brown', '0432567890', 'tom@gm.com'),
 (38, 'Harry', 'lee', '0401212456', 'harry@test.com'),
-(39, 'admin', 'admin', '0400000000', 'admin@go.com');
+(39, 'admin', 'admin', '0400000000', 'admin@go.com'),
+(40, 'Amy', 'Lee', '0401213212', 'amy@dsdc.om');
 
 --
 -- Indexes for dumped tables
@@ -15042,7 +15044,7 @@ ALTER TABLE `stop2`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- Constraints for dumped tables
 --
