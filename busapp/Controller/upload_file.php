@@ -3,7 +3,7 @@ session_start();
 require_once("../Model/db.php");
 require_once("../Model/pdoFunction.php");
 ?>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <?php
 
   if(!empty($_FILES['uploaded_file'])){
