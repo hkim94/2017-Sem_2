@@ -99,22 +99,46 @@ if (!isset($_SESSION['userID'])){
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="small material-icons" style="color:white; margin:10px;">menu</i></a>
         
         <p style="color:white; font-size:13pt;  text-align:center; background:linear-gradient(to right, rgb(123, 193, 68), rgb(248, 151, 40));">Report Bug</p>
+        
+        <p style="text-align:center; color:white; padding:5%; font-size:9pt;">
+        	You can help us to improve by reporting issues in the page.</br>
+        	Please take screen shot and upload it to us.
+      	</p>
       </div>
 
   <?php
   	}
   ?>
-  <div class="col s12" style="margin:5%;">
-      <form enctype="multipart/form-data" action="../../Controller/upload_file.php" method="post">
-      <p style="text-align:center; color:rgb(123,193,68); padding-bottom:5%;">
-        You can help improve Go Transit App by reporting issues in the page.</br>
-        Please take screen shot and upload it to us.
-      </p>
-        <input type="file" name="uploaded_file" id="uploaded_file"></br>
-        <input type="submit" value="Upload" style="background-color:rgb(248, 151, 40); color:white; padding:5px; border:none; float:right;">
-      </form>
-  </div>
-
+      <div class="col s12" style="margin:5%; padding-bottom:5%;">
+          <form enctype="multipart/form-data" action="../../Controller/upload_file.php" method="post" id="file_input" runat="server">
+            <input type="file" name="uploaded_file" id="uploaded_file" style="border:1px solid rgb(248, 151, 40); margin:10px;" required>
+            <input type="submit" value="Upload" id="uploadbtn" style="background-color:rgb(248, 151, 40); color:white; padding:5px; border:none; float:right;">
+          </form>
+      </div>
+      
+      <div style="margin:5%;">
+      	<img id="prev" src="#" alt="Preview Image" style="width:100%;"/> 
+      </div>
+      
+      <div style="bottom:0; position:absolute; padding:10px; background-color:rgb(123, 193, 68); width:100%; color:white; text-align:center;">
+      	<p style="margin:0px;">Need help? Technical Issues? Contact Us</p>
+        <p>admin@go.com.au</p>
+      </div>
   </body>
 </html>
 
+<script>
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#prev').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+$("#uploaded_file").change(function() {
+	readURL(this);
+});
+</script>

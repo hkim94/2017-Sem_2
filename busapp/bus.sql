@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 16, 2017 at 04:02 PM
+-- Generation Time: Nov 17, 2017 at 08:06 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -61,7 +61,8 @@ INSERT INTO `favourite_bus` (`f_BusID`, `busno`, `userID`) VALUES
 (3, '155', 37),
 (4, '180', 37),
 (11, '111', 37),
-(12, '222', 38);
+(12, '222', 38),
+(13, '555', 37);
 
 -- --------------------------------------------------------
 
@@ -81,7 +82,10 @@ CREATE TABLE `favourite_stop` (
 
 INSERT INTO `favourite_stop` (`f_StopID`, `stopID`, `userID`) VALUES
 (1, 12, 37),
-(2, 3428, 37);
+(2, 3428, 37),
+(9, 324, 38),
+(16, 365, 38),
+(17, 330, 38);
 
 -- --------------------------------------------------------
 
@@ -105,10 +109,8 @@ CREATE TABLE `gocard` (
 
 INSERT INTO `gocard` (`gocardno`, `userID`, `balance`, `conID`, `conType`, `organisation`, `DOB`) VALUES
 ('0000000000000000', 39, NULL, NULL, NULL, NULL, NULL),
-('1234546334523322', 40, NULL, NULL, NULL, NULL, NULL),
-('4321422341212214', 38, NULL, '23123132131321311', 'senior', 'dadasda', '2017-11-02'),
-('4567893425678904', 37, '22.50', '34563421568904356', 'senior', 'Centrelink', '1988-12-03'),
-('9432145678234678', 29, '23.50', '', '', '', '0000-00-00');
+('4321422341212214', 38, NULL, '23132131231231212', 'adult', 'RTYU', '2017-11-30'),
+('4567893425678904', 37, '22.50', '34563421568904356', 'senior', 'Centrelink', '1988-12-03');
 
 -- --------------------------------------------------------
 
@@ -14911,11 +14913,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `fname`, `lname`, `mobile`, `email`) VALUES
-(29, 'Jerry', 'Lee', '0401157894', 'jerry@g.com'),
-(37, 'Tom', 'Brown', '0432567890', 'tom@gm.com'),
+(37, 'Tom', 'Brownely', '0432567890', 'tom@gm.com'),
 (38, 'Harry', 'lee', '0401212456', 'harry@test.com'),
-(39, 'admin', 'admin', '0400000000', 'admin@go.com'),
-(40, 'Amy', 'Lee', '0401213212', 'amy@dsdc.om');
+(39, 'admin', 'admin', '0400000000', 'admin@go.com');
 
 --
 -- Indexes for dumped tables
@@ -15014,12 +15014,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `favourite_bus`
 --
 ALTER TABLE `favourite_bus`
-  MODIFY `f_BusID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `f_BusID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `favourite_stop`
 --
 ALTER TABLE `favourite_stop`
-  MODIFY `f_StopID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `f_StopID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `location_bus`
 --
@@ -15044,7 +15044,7 @@ ALTER TABLE `stop2`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- Constraints for dumped tables
 --

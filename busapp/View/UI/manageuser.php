@@ -53,8 +53,8 @@ $count = 0;
         }
     ?>
     
-    <div style="margin:5%;">
-        <a href="../../Controller/pdoLogout.php" style="display:inline-block; float:right; text-decoration:none; color:black;"><i class="material-icons">exit_to_app</i></a>
+    <div style="margin:5%; position:absolute; bottom:0;">
+        <a href="../../Controller/pdoLogout.php" style="display:inline-block; text-decoration:none; color:white; padding:10px; background-color:rgb(123, 193, 68);">Log Out</a>
     </div>
 </body>
 </html>

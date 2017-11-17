@@ -58,7 +58,10 @@ if (!isset($_SESSION['userID'])){
               <div class="background">
                 <img src="../image/bg3.jpg">
               </div>
-              <img class="circle" src="../image/user_icon.svg"></a>
+              <div>
+              	<img class="circle" src="../image/user_icon.svg" style="display:inline-block";>
+                <a href="../../Controller/pdoLogout.php" style="display:inline-block; float:right; text-decoration:none; color:black;"><i class="material-icons">exit_to_app</i></a>
+              </div>
               <span class="white-text name"><?php echo $row['fname']; echo "\n\n"; echo $row['lname'];?></span>
               <span class="white-text email"><?php echo $row['email'];?></span>
             </div>
