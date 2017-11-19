@@ -117,7 +117,7 @@ if (!isset($_SESSION['userID'])){
       </div>
       
       <div style="margin:5%;">
-      	<img id="prev" src="#" alt="Preview Image" style="width:100%;"/> 
+      	<img id="prev" src="#" alt="Preview for Image" style="width:100%;"/> 
       </div>
       
       <div style="bottom:0; position:absolute; padding:10px; background-color:rgb(123, 193, 68); width:100%; color:white; text-align:center;">
